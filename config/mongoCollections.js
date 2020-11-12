@@ -18,14 +18,8 @@ const getCollectionFn = collection => {
 /* Now, you can list your collections here: */
 module.exports = {
     users: getCollectionFn("users"),
-    bolgs: getCollectionFn("bolgs"),
-    comments: getCollectionFn("comments")
+    questions: getCollectionFn("questions"),
+    comments: getCollectionFn("comments"),
+    fsFiles: getCollectionFn("fs.files"),
+    fsChunks: getCollectionFn("fs.chunks"),
 };
-
-//  function main(){
-//   let animals = getCollectionFn("animals");
-//   console.log(animals);
-// } 
-
-
-// main();

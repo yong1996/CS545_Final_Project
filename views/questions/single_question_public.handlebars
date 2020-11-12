@@ -1,0 +1,115 @@
+{{#section 'style'}}
+<link type="text/css" href="/public/vendor/lightbox2/css/lightbox.min.css" rel="stylesheet">
+{{/section}}
+{{!-- Basic Info --}}
+<section class="mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="avatar-container">
+                {{#if question.avatar}}
+                <img src="{{ question.avatar }}" class="img-fluid avatar" alt="question avatar">                
+                {{else}}
+                <img src="/public/img/avatar/default-question.png" class="img-fluid avatar" alt="question avatar">
+                {{/if}}
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="question-info-container">
+                    <h1><span id="question-name">{{ question.name }}</span></h1>
+                    <h2>Type</h2>
+                    <p id="question-type">{{ question.type }}</p>
+                    <div>
+                        <h2>Gender</h2>
+                        <p id="question-gender">{{ question.gender }}</p>
+                        <h2>Age</h2>
+                        <p id="question-age">{{ question.age }}</p>
+                    </div>
+                    <div>
+                        <h2>Birthday</h2>
+                        <p id="question-dob">{{ question.dob }}</p>
+                    </div>
+                    <div>
+                        <h2>Owner</h2>
+                        <p id="question-owner"><a href="/user/{{ question.owner }}">{{ question.owner }}</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{!-- Photo --}}
+{{#if photos}}        
+<section class="m-4">
+    <div class="container">
+        <h1>Photos</h1>
+        <div id="photos" class="row">
+            {{#each photos}}
+            <div class="col-lg-3 col-6 my-3 question-img-container">
+                <a href="{{ photo }}" data-alt="question photos" data-lightbox="photos">
+                    <img id="{{ id }}" src="{{ photo }}" class="question-img img-fluid rounded w-100" alt="question photos">
+                </a>
+            </div>
+            {{/each}}
+        </div>
+        <div class="text-center">
+            <button id="load-more-photos" data-current-page="1" {{#if isPhotoLastPage}} style="display: none" {{/if}} class="btn btn-secondary">Load More</button>
+        </div>
+    </div>
+</section>
+{{/if}}
+
+{{!-- Comment --}}
+<section class="m-4">
+    <div class="container">
+        <h1>Comment</h1>
+        {{#unless comments}}
+        <p id="no-data-found-alert-comment" class="no-data-found-alert">No comments found.</p>
+        {{/unless}}
+        <div id="comments" class="comment-container">
+        {{#each comments}}
+            <div class="row single-comment">
+                <div class="col-2">
+                    <div class="avatar-container">
+                        {{#if user.avatar}}
+                        <img class="img-fluid avatar" alt="user avatar" src="{{user.avatar}}">
+                        {{else}}
+                        <img class="img-fluid avatar" alt="user avatar" src="/public/img/avatar/default-user.png">
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="comment-content">
+                        <p>{{content}}</p>
+                        <p class="comment-data">
+                            <a href="/user/{{user.username}}">{{user.username}}</a>
+                            <span class="comment-date">{{date}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+        </div>
+        <div class="text-center">
+            <button id="load-more-comments" data-current-page="1" {{#if isCommentLastPage}} style="display: none" {{/if}} class="btn btn-secondary">Load more</button>
+        </div>
+        {{#if username}}
+        <div class="comment-form-container my-4">
+            <form id="comment-form">
+                <label for="comment-form-content">Comment</label>
+                <textarea class="form-control comment-form-content" name="content" id="comment-form-content" rows="3" maxlength="160" placeholder="Write your comment here ..."></textarea>
+                <button class="btn btn-primary btn-comment" type="submit">Post comment</button>
+            </form>
+        </div>
+        {{/if}}
+    </div>
+</section>
+
+{{#section 'script'}}
+{{#if photos}}        
+<script src="/public/vendor/lightbox2/js/lightbox.min.js"></script>
+{{/if}}
+<script src="/public/js/question_utils.js"></script>
+<script src="/public/js/pages/question_public.js"></script>
+{{/section}}

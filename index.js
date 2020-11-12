@@ -13,7 +13,7 @@ configRoutes(app);
 app.engine('handlebars', exphbs({defaultLayout: 'main', helpers: require('./config/handlebars-helpers')}));
 app.set('view engine', 'handlebars');
 
-app.listen(3011, () => {
+app.listen(3000, () => {
   console.log("We've now got a server!");
   console.log('Your routes will be running on http://localhost:3000');
 });

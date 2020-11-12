@@ -8,7 +8,7 @@ router.get('/signup', middleware.notLoginRequired, async (req, res) => {
   res.render('account/signup', {title: "Signup", hideFooter: true});
 });
 
-router.post('/signup', middleware.notLoginRequired, middleware.signupLimiter, async (req, res) => {
+router.post('/signup', middleware.notLoginRequired, async (req, res) => {
   try {
     let username = xss(req.body.username);
     await usersData.addUser(username, req.body.password);
@@ -27,7 +27,7 @@ router.get('/login', middleware.notLoginRequired, async (req, res) => {
   res.render('account/login', {title: "Login", hideFooter: true});
 });
 
-router.post('/login', middleware.notLoginRequired, middleware.loginLimiter, async (req, res) => {
+router.post('/login', middleware.notLoginRequired, async (req, res) => {
   try {
     let username = xss(req.body.username);
 

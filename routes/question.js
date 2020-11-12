@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const dogData = require("../data/dogs");
+const questionData = require("../data/questions");
 const commentData = require("../data/comments");
 const breedData = require("../data/breed");
 const multer  = require("multer");
@@ -11,17 +11,17 @@ const xss = require("xss");
 
 router.get('/', async (req, res) => {
     try{
-      let dogs = await dogData.getAllDogs();
+      let questions = await questionData.getAllQuestions();
 
-      let pageData = helper.pagination(dogs, req.query.page, 12);
+      let pageData = helper.pagination(questions, req.query.page, 12);
       data = {
-        title: "All Dogs",
-        dogs : pageData.data,
+        title: "All Questions",
+        questions : pageData.data,
         totalPage: pageData.totalPage,
         currentPage: pageData.currentPage,
         username : req.session.username
       };
-      res.render('dogs/dogs', data);
+      res.render('questions/questions', data);
     } catch (e) {
       res.status(500);
       res.render('error', {title: "Server Internal Error", errorCode: 500, username: req.session.username});
@@ -30,14 +30,12 @@ router.get('/', async (req, res) => {
 
 router.post('/', middleware.loginRequiredJson, async (req, res) => {
     try{
-      let gender = req.body.gender;
-      let type = req.body.type;
-      let dob = req.body.dob;
       let name = xss(req.body.name);
+      let discussion = xss(req.body.discussion);
       let owner = req.session.userid;
 
-      let dog = await dogData.addDog(name, gender, dob, type, owner);
-      res.json({ status: "success", dog: dog });
+      let question = await questionData.addQuestion(name, discussion, owner);
+      res.json({ status: "success", question: question });
     } catch (e) {
       res.status(400);
       res.json({status: "error", errorMessage: e});
@@ -46,17 +44,17 @@ router.post('/', middleware.loginRequiredJson, async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try{
-      let dogId = req.params.id;
+      let questionId = req.params.id;
 
-      let dog = await dogData.getDog(dogId);
-      let photoPagedData = await helper.getFirstPageOfPhotos(dog.photos);
+      let question = await questionData.getQuestion(questionId);
+      let photoPagedData = await helper.getFirstPageOfPhotos(question.photos);
 
-      let comments = await commentData.getCommentsByDog(dogId);
+      let comments = await commentData.getCommentsByQuestion(questionId);
       let commentPagedData = helper.pagination(comments, 1, 3);
 
       data = {
-        title: dog.name, 
-        dog: dog, 
+        title: question.name, 
+        question: question, 
         photos: photoPagedData.photos,
         isPhotoLastPage: photoPagedData.isLastPage,
         comments : commentPagedData.data,
@@ -65,10 +63,10 @@ router.get('/:id', async (req, res) => {
         types: breedData.getBreeds()
       }
 
-      if (dog.owner === req.session.username)
-        res.render('dogs/single_dog_owner', data);
+      if (question.owner === req.session.username)
+        res.render('questions/single_question_owner', data);
       else
-        res.render('dogs/single_dog_public', data);
+        res.render('questions/single_question_public', data);
     } catch (e) {
       res.status(404);
       res.render('error', {title: "Not Found", errorCode: 404, username: req.session.username});
@@ -77,9 +75,9 @@ router.get('/:id', async (req, res) => {
 
 router.delete('/:id', middleware.loginRequiredJson, async (req, res) => {
     try{
-      let dogId = req.params.id;
-      await dogData.checkOwner(req.session.userid, dogId);
-      await dogData.removeDog(dogId);
+      let questionId = req.params.id;
+      await questionData.checkOwner(req.session.userid, questionId);
+      await questionData.removeQuestion(questionId);
       res.json({status: "success"});
     } catch (e) {
       res.status(500);
@@ -89,13 +87,14 @@ router.delete('/:id', middleware.loginRequiredJson, async (req, res) => {
 
 router.put('/:id', middleware.loginRequiredJson, async (req, res) => {
     try{
-      let dogId = req.params.id;
-      let dog = req.body.dog;
-      dog.name = xss(dog.name);
+      let questionId = req.params.id;
+      let question = req.body.question;
+      question.name = xss(question.name);
+      question.discussion = xss(question.discussion);
 
-      await dogData.checkOwner(req.session.userid, dogId);
-      dog = await dogData.updateDog(dogId, dog);
-      res.json({status: "success", dog: dog});
+      await questionData.checkOwner(req.session.userid, questionId);
+      question = await questionData.updateQuestion(questionId, question);
+      res.json({status: "success", question: question});
     } catch (e) {
       res.status(400);
       res.json({status: "error", errorMessage: e});
@@ -104,24 +103,10 @@ router.put('/:id', middleware.loginRequiredJson, async (req, res) => {
 
 router.post('/:id/avatar', middleware.loginRequiredJson, upload.single('avatar'), async (req, res) => {
     try {
-      let dogId = req.params.id;
-      await dogData.checkOwner(req.session.userid, dogId);
-      let dog = await dogData.updateAvatar(dogId, req.file);
-      res.json({status: "success", avatar: dog.avatar});
-    } catch (e) {
-      res.status(400);
-      res.json({status: "error", errorMessage: e});
-    }
-});
-
-router.post('/:id/heightWeight', middleware.loginRequiredJson, async (req, res) => {
-    try {
-      let dogId = req.params.id;
-      let heightWeight = req.body.heightWeight;
-
-      await dogData.checkOwner(req.session.userid, dogId);
-      let dog = await dogData.addHeightWeight(dogId, heightWeight);
-      res.json({status: "success", dog: dog});
+      let questionId = req.params.id;
+      await questionData.checkOwner(req.session.userid, questionId);
+      let question = await questionData.updateAvatar(questionId, req.file);
+      res.json({status: "success", avatar: question.avatar});
     } catch (e) {
       res.status(400);
       res.json({status: "error", errorMessage: e});
@@ -130,9 +115,9 @@ router.post('/:id/heightWeight', middleware.loginRequiredJson, async (req, res) 
 
 router.get('/:id/photos', async (req, res) => {
     try{
-        let dogId = req.params.id;
-        let dog = await dogData.getDog(dogId);
-        let pagedData = await helper.getCertainPageOfPhotos(dog.photos, req.query.page, 4);
+        let questionId = req.params.id;
+        let question = await questionData.getQuestion(questionId);
+        let pagedData = await helper.getCertainPageOfPhotos(question.photos, req.query.page, 4);
         res.json({status: "success", photos: pagedData.photos, isLastPage: pagedData.isLastPage});
     } catch (e) {
         res.status(500);
@@ -142,11 +127,11 @@ router.get('/:id/photos', async (req, res) => {
 
 router.post("/:id/photos", middleware.loginRequiredJson, upload.single('photo'), async (req, res) => {
     try{
-      let dogId = req.params.id;
+      let questionId = req.params.id;
 
-      await dogData.checkOwner(req.session.userid, dogId);
-      let dog = await dogData.addPhotos(dogId, req.file);
-      let pagedData = await helper.getFirstPageOfPhotos(dog.photos);
+      await questionData.checkOwner(req.session.userid, questionId);
+      let question = await questionData.addPhotos(questionId, req.file);
+      let pagedData = await helper.getFirstPageOfPhotos(question.photos);
 
       res.json({status: "success", photos: pagedData.photos, isLastPage: pagedData.isLastPage});
     } catch(e) {
@@ -157,9 +142,9 @@ router.post("/:id/photos", middleware.loginRequiredJson, upload.single('photo'),
 
 router.get('/:id/comments', async (req, res) => {
     try{
-        let dogId = req.params.id;
+        let questionId = req.params.id;
         let page = req.query.page;
-        let comments = await commentData.getCommentsByDog(dogId);
+        let comments = await commentData.getCommentsByQuestion(questionId);
         let pagedData = helper.pagination(comments, page, 3);
 
         res.json({status: "success", comments: pagedData.data, isLastPage: pagedData.isLastPage});
@@ -169,12 +154,12 @@ router.get('/:id/comments', async (req, res) => {
     }
 });
 
-router.post('/:id/comments', middleware.loginRequiredJson, middleware.commentLimiter, async (req, res) => {
+router.post('/:id/comments', middleware.loginRequiredJson, async (req, res) => {
     try{
-        let dogId = req.params.id;
+        let questionId = req.params.id;
         let content = xss(req.body.content);
 
-        let comments = await commentData.addComment(content, req.session.userid, dogId);
+        let comments = await commentData.addComment(content, req.session.userid, questionId);
         let pagedData = helper.pagination(comments, 1, 3);
 
         res.json({status: "success", comments: pagedData.data, isLastPage: pagedData.isLastPage});
@@ -184,14 +169,14 @@ router.post('/:id/comments', middleware.loginRequiredJson, middleware.commentLim
     }
 });
 
-router.delete('/:dogid/photo/:photoid', middleware.loginRequiredJson, async (req, res) => {
+router.delete('/:questionid/photo/:photoid', middleware.loginRequiredJson, async (req, res) => {
     try{
-      let dogId = req.params.dogid;
+      let questionId = req.params.questionid;
       let photoId = req.params.photoid;
 
-      await dogData.checkOwner(req.session.userid, dogId);
-      let dog = await dogData.removePhoto(dogId, photoId);
-      let pagedData = await helper.getFirstPageOfPhotos(dog.photos);
+      await questionData.checkOwner(req.session.userid, questionId);
+      let question = await questionData.removePhoto(questionId, photoId);
+      let pagedData = await helper.getFirstPageOfPhotos(question.photos);
 
       res.json({status: "success", photos: pagedData.photos, isLastPage: pagedData.isLastPage});
     } catch (e) {

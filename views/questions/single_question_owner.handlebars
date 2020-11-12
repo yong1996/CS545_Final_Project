@@ -1,0 +1,324 @@
+{{#section 'style'}}
+<link type="text/css" href="/public/vendor/lightbox2/css/lightbox.min.css" rel="stylesheet">
+{{/section}}
+{{!-- Basic Info --}}
+<section class="mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="avatar-container">
+                    {{#if question.avatar}}
+                    <img src="{{ question.avatar }}" id="question-avatar" class="img-fluid avatar" alt="question avatar">
+                    {{else}}
+                    <img src="/public/img/avatar/default-question.png" id="question-avatar" class="img-fluid rounded-circle avatar" alt="question avatar">
+                    {{/if}}
+                </div>
+                <div class="text-center">
+                    <button data-toggle="modal" class="btn btn-secondary my-3" data-target="#update-avatar-modal">Change avatar</button>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="question-info-container">
+                    <h1><span id="question-name">{{ question.name }}</span></h1>
+                    <h2>Type</h2>
+                    <p id="question-type">{{ question.type }}</p>
+                    <div>
+                        <h2>Gender</h2>
+                        <p id="question-gender">{{ question.gender }}</p>
+                        <h2>Age</h2>
+                        <p id="question-age">{{ question.age }}</p>
+                    </div>
+                    <div>
+                        <h2>Birthday</h2>
+                        <p id="question-dob">{{ question.dob }}</p>
+                    </div>
+                    <div>
+                        <h2>Owner</h2>
+                        <p id="question-owner"><a href="/user/{{ question.owner }}">{{ question.owner }}</a></p>
+                    </div>
+                </div>
+                <button id="edit-question-profile-button" class="btn btn-primary my-3" data-toggle="modal" data-target="#edit-question-profile-modal">Edit</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{!-- modal for update avatar --}}
+<div class="modal fade" id="update-avatar-modal" tabindex="-1" role="dialog" aria-labelledby="update-avatar-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="update-avatar-modal-title" class="modal-title">Upload avatar</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <form id="update-avatar-form" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="update-avatar-form-file">Avatar</label>
+                        <button type="button" id="question-avatar-upload-btn" class="btn btn-primary">Choose file</button>
+                        <p id="uploaded-avatar-name" class="uploaded-file-name"></p>
+                        <input type="file" id="update-avatar-form-file" class="btn btn-primary d-none" name="avatar" accept="image/*">
+                    </div>    
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                    <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{!-- modal for edit profile --}}
+<div class="modal fade" id="edit-question-profile-modal" tabindex="-1" role="dialog" aria-labelledby="edit-question-profile-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="edit-question-profile-modal-title" class="modal-title">Edit Profile</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <form id="edit-question-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="edit-question-form-name">Name</label>
+                        <input type="text" id="edit-question-form-name" class="form-control" placeholder="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-question-form-type">Type</label>
+                        <select id="edit-question-form-type" class="custom-select form-control" name="type">
+                            {{#each types}}
+                            <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <div class="radio-group row-fluid text-center">
+                            <div class="col-4 p-0">
+                                <input class="radio" type="radio" id="edit-question-form-gender-male" name="gender" value="Male">
+                                <label for="edit-question-form-gender-male">Male</label>
+                            </div>
+                            <div class="col-4 p-0">
+                                <input class="radio" type="radio" id="edit-question-form-gender-female" name="gender" value="Female">
+                                <label for="edit-question-form-gender-female">Female</label>
+                            </div>
+                            <div class="col-4 p-0">
+                                <input class="radio" type="radio" id="edit-question-form-gender-other" name="gender" value="Other">
+                                <label for="edit-question-form-gender-other">Other</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-question-form-dob">Date of Birth</label>
+                        <input id="edit-question-form-dob" class="form-control" name="dob" placeholder="Select date" type="text" autocomplete="off">
+                    </div> 
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{{!-- Health --}}
+<section class="m-4">
+    <div class="container">
+        <h1>Health</h1>
+        <div class="question-health-container">
+            {{#unless question.heightWeight}}
+            <p id="no-data-found-alert-health" class="no-data-found-alert">Please update weight and height of the question to see health data.</p>
+            {{/unless}}
+            <div id="question-health-info" class="question-health-info" {{#unless question.heightWeight}}style="display: none;"{{/unless}}>
+                <div class="question-health-info-basic">
+                    <h2>Weight</h2>
+                    <p><span id="question-weight">{{ question.weight }}</span> lb</p>
+                    <h2>Height</h2>
+                    <p><span id="question-height">{{ question.height }}</span> in</p> 
+
+                    <h2>BMI</h2>
+                    <p id="question-bmi">{{ question.bmi }}</p>
+                </div>
+                <div class="question-health-info-condition">
+                    <h2>Health Condition</h2>
+                    <p id="question-health">{{ question.healthCondition }}</p>
+                </div>
+                <div class="question-health-info-date">
+                    <h2>Last Update</h2>
+                    <p id="question-date">{{ question.lastHeightWeightUpdate }}</p>
+                </div>
+            </div>
+            <button id="add-height-weight-button" class="btn btn-primary my-3" data-toggle="modal" data-target="#add-height-weight-modal">Add Weight/Height</button>
+            <div id="question-health-charts" class="row {{#unless question.heightWeight}}hide-chart{{/unless}}">
+                <canvas class="col-lg-6" id="bmi-chart" height="350"></canvas>
+                <canvas class="col-lg-6" id="weight-chart" height="350"></canvas>
+            </div> 
+        </div>
+    </div>
+</section>
+
+{{!-- modal for add height weight --}}
+<div class="modal fade" id="add-height-weight-modal" tabindex="-1" role="dialog" aria-labelledby="add-height-weight-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="add-height-weight-modal-title" class="modal-title">Update health information</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <form id="add-height-weight-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="add-height-weight-form-weight">Weight in lb</label>
+                        <input type="text" id="add-height-weight-form-weight" class="form-control" placeholder="weight" name="weight">
+                    </div>
+                    <div class="form-group">
+                        <label for="add-height-weight-form-height">Height in in</label>
+
+                        <input type="text" id="add-height-weight-form-height" class="form-control" placeholder="height" name="height">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{!-- Photo --}}
+<section class="m-4">
+    <div class="container">
+        <h1>Photos</h1>
+        <p {{#if photos}}style="display: none"{{/if}} id="no-data-found-alert-photo" class="no-data-found-alert">No photos found. Welcome to upload your lovely photos.</p>
+        <button class="btn btn-primary my-2" data-toggle="modal" data-target="#upload-photo-modal">Upload photo</button>
+        <div id="photos" class="row">
+            {{#each photos}}
+            <div class="col-lg-3 col-6 my-3 question-img-container">
+                <button type="button" class="btn btn-danger btn-sm btn-round btn-shadow btn-delete-photo position-absolute">delete</button>
+                <a href="{{ photo }}" data-alt="question photos" data-lightbox="photos">
+                    <img id="{{ id }}" src="{{ photo }}" class="question-img img-fluid rounded w-100" alt="question photos">
+                </a>
+            </div>
+            {{/each}}
+        </div>
+        <div class="text-center">
+            <button id="load-more-photos" data-current-page="1" {{#if isPhotoLastPage}} style="display: none" {{/if}} class="btn btn-secondary">Load More</button>
+        </div>
+    </div>
+</section>
+
+{{!-- modal for upload photo --}}
+<div class="modal fade" id="upload-photo-modal" tabindex="-1" role="dialog" aria-labelledby="upload-photo-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="upload-photo-modal-title" class="modal-title">Upload photo</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <form id="upload-photo-form" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="upload-photo-form-file">Photo</label>
+                        <button type="button" id="upload-photo-btn" class="btn btn-primary">Choose file</button>
+                        <p id="uploaded-photo-name" class="uploaded-file-name"></p>
+                        <input type="file" id="upload-photo-form-file" class="btn btn-primary d-none" name="photo" accept="image/*">
+                    </div>    
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                    <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{!-- Comment --}}
+<section class="m-4">
+    <div class="container">
+        <h1>Comment</h1>
+        {{#unless comments}}
+        <p id="no-data-found-alert-comment" class="no-data-found-alert">No comments found.</p>
+        {{/unless}}
+        <div id="comments" class="comment-container">
+        {{#each comments}}
+            <div class="row single-comment">
+                <div class="col-2">
+                    <div class="avatar-container">
+                        {{#if user.avatar}}
+                        <img class="img-fluid avatar" alt="user avatar" src="{{user.avatar}}">
+                        {{else}}
+                        <img class="img-fluid avatar" alt="user avatar" src="/public/img/avatar/default-user.png">
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="comment-content">
+                        <p>{{content}}</p>
+                        <p class="comment-data">
+                            <a href="/user/{{user.username}}">{{user.username}}</a>
+                            <span class="comment-date">{{date}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+        </div>
+        <div class="text-center">
+            <button id="load-more-comments" data-current-page="1" {{#if isCommentLastPage}} style="display: none" {{/if}} class="btn btn-secondary">Load more</button>
+        </div>
+        <div class="comment-form-container my-4">
+            <form id="comment-form">
+                <label for="comment-form-content">Comment</label>
+                <textarea class="form-control comment-form-content" name="content" id="comment-form-content" rows="3" maxlength="160" placeholder="Write your comment here ..."></textarea>
+                <button class="btn btn-primary btn-comment" type="submit">Post comment</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{{#section 'script'}}
+<script src="/public/vendor/chartjs/Chart.js"></script>
+<script src="/public/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/public/vendor/lightbox2/js/lightbox.min.js"></script>
+<script src="/public/js/health_chart.js"></script>
+<script src="/public/js/question_utils.js"></script>
+<script src="/public/js/pages/question_owner.js"></script>
+
+{{#if question.heightWeight}}
+<script>
+{{#each question.healthDateList}}
+addLabel(bmiChart, "{{ this }}");
+addLabel(weightChart, "{{ this }}");
+{{/each}}
+
+{{#each question.bmiList}}
+addData(bmiChart, {{ this }});
+{{/each}}
+
+{{#each question.weightList}}
+addData(weightChart, {{ this }});
+{{/each}}
+</script>
+{{/if}}
+
+{{/section}}

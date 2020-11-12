@@ -3,7 +3,7 @@
 const mongoCollections = require("../config/mongoCollections");
 const comments = mongoCollections.comments;
 const users = mongoCollections.users;
-const dogs = mongoCollections.dogs;
+const questions = mongoCollections.questions;
 const imgData = require("./img");
 const ObjectId = require('mongodb').ObjectID;
 
@@ -38,28 +38,28 @@ function validateContent(content){
   if (content.length > 160) throw `length of you comment is greater than 160`;
 }
 
-async function validateDog(dog){
-  if (!dog) throw "dog is undefinded";
-  if (!ObjectId.isValid(dog)) throw "dog is invalid";
+async function validateQuestion(question){
+  if (!question) throw "question is undefinded";
+  if (!ObjectId.isValid(question)) throw "question is invalid";
 
-  let parsedId = ObjectId.createFromHexString(dog);
-  const dogsCollection = await dogs();
-  const dogInfo = await dogsCollection.findOne({_id: parsedId});
-  if (!dogInfo) throw "dog is not exist";
+  let parsedId = ObjectId.createFromHexString(question);
+  const questionsCollection = await questions();
+  const questionInfo = await questionsCollection.findOne({_id: parsedId});
+  if (!questionInfo) throw "question is not exist";
 }
 
 //========================================
 // Body functions here
 
-async function addComment(content, user, dog) {
+async function addComment(content, user, question) {
   validateContent(content);
   await validateUser(user);
-  await validateDog(dog);
+  await validateQuestion(question);
 
   let comment = {
     content: content,
     user: user,
-    dog: dog,
+    question: question,
     date: new Date()
   }
   
@@ -67,7 +67,7 @@ async function addComment(content, user, dog) {
   const insertInfo = await commentsCollection.insertOne(comment);
   if (insertInfo.insertedCount === 0) throw "could not add comments";
 
-  return await getCommentsByDog(dog);
+  return await getCommentsByQuestion(question);
 }
 
 async function getComment(id){
@@ -107,15 +107,15 @@ async function deleteComment(id){
   return comment;
 }
 
-async function deleteCommentsByDog(dog){
-  await validateDog(dog);
+async function deleteCommentsByQuestion(question){
+  await validateQuestion(question);
 
   const commentsCollection = await comments();
-  const commentsInfo = await commentsCollection.find({dog: dog}).toArray();
+  const commentsInfo = await commentsCollection.find({question: question}).toArray();
   // if (!commentsInfo) throw "could not find comment successfully";
 
-  await commentsCollection.deleteMany({dog: dog});
-  // if (deletionInfo.deletedCount === 0) throw "could not delete comment with the dog";
+  await commentsCollection.deleteMany({question: question});
+  // if (deletionInfo.deletedCount === 0) throw "could not delete comment with the question";
 
   return commentsInfo;
 }
@@ -129,11 +129,11 @@ async function getCommentsByUser(user){
   return comment
 }
 
-async function getCommentsByDog(dog){
-  await validateDog(dog);
+async function getCommentsByQuestion(question){
+  await validateQuestion(question);
 
   const commentsCollection = await comments();
-  const commentInfo = await commentsCollection.find({dog: dog}).sort({date: -1}).toArray();
+  const commentInfo = await commentsCollection.find({question: question}).sort({date: -1}).toArray();
 
   for (let comment of commentInfo) {
     const usersCollection = await users();
@@ -155,7 +155,7 @@ module.exports = {
   addComment,
   getComment,
   getCommentsByUser,
-  getCommentsByDog,
+  getCommentsByQuestion,
   deleteComment,
-  deleteCommentsByDog,
+  deleteCommentsByQuestion,
 }
