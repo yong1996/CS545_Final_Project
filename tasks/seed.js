@@ -21,18 +21,19 @@ const main = async () => {
 
     const userOne = await userData.addUser(user1.username, user1.password);
     console.log("user1 created");
-    await uploadUserAvatar(userId1, 'public/img/avatar/demo/user1.jpg');
-    await db.serverConfig.close();
+    // await uploadUserAvatar(userId1, 'public/img/avatar/demo/user1.jpg');
+    // await db.serverConfig.close();
 
-    question1 = await questionData.addQuestion(
-        "11",
-        "22",
-        userId1
-    );
-    user1question1 = question1._id.toString();
-    await uploadQuestionAvatar(user1question1, 'public/img/question/demo/user1/question1.jpg');
+    // question1 = await questionData.addQuestion(
+    //     "11",
+    //     "22",
+    //     userId1
+    // );
+    // user1question1 = question1._id.toString();
+    // await uploadQuestionAvatar(user1question1, 'public/img/question/demo/user1/question1.jpg');
     
-    console.log("a's question1 created");
+    // console.log("a's question1 created");
+    await db.serverConfig.close();
 }
 
 main().catch(console.log);
