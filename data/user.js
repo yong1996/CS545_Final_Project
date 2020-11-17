@@ -3,8 +3,8 @@
 const mongoCollections = require("../config/mongoCollections");
 const users = mongoCollections.users;
 const ObjectId = require('mongodb').ObjectID;
-// const imgData = require("../data/img");
-// const questionData = require("../data/questions");
+const imgData = require("../data/img");
+const questionData = require("../data/questions");
 const bcryptjs = require("bcryptjs");
 const saltRounds = 5;
 
@@ -122,22 +122,22 @@ async function changePassword(id, newPassword){
   return await getUser(id);
 }
 
-// async function updateAvatar(id, file){
-//   validateId(id);
+async function updateAvatar(id, file){
+  validateId(id);
 
-//   let photoId = await imgData.createGridFS(file);
+  let photoId = await imgData.createGridFS(file);
    
-//   const usersCollection = await users();
-//   const parsedId = ObjectId.createFromHexString(id);
-//   let oldUser = await usersCollection.findOne({ _id: parsedId })
-//   const updateInfo = await usersCollection.updateOne({ _id: parsedId }, { $set: {avatar: photoId.toString()}});
-//   if (updateInfo.modifiedCount === 0) throw "Could not update user avatar successfully";
+  const usersCollection = await users();
+  const parsedId = ObjectId.createFromHexString(id);
+  let oldUser = await usersCollection.findOne({ _id: parsedId })
+  const updateInfo = await usersCollection.updateOne({ _id: parsedId }, { $set: {avatar: photoId.toString()}});
+  if (updateInfo.modifiedCount === 0) throw "Could not update user avatar successfully";
 
-//   if(oldUser.avatar !== null)
-//     await imgData.deletePhoto(oldUser.avatar)
+  if(oldUser.avatar !== null)
+    await imgData.deletePhoto(oldUser.avatar)
 
-//   return await getUser(id);
-// }
+  return await getUser(id);
+}
 
 async function comparePassword(username, password) {
   validateUsername(username);
@@ -157,7 +157,7 @@ async function comparePassword(username, password) {
 module.exports = {
     addUser,
     getUser,
-    // updateAvatar,
+    updateAvatar,
     changePassword,
     comparePassword,
     getUserByUsername,

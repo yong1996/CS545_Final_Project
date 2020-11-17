@@ -98,13 +98,13 @@ async function validateOwner(owner){
 
 // ======================================================
 // Body functions
-async function addQuestion(name, discussion, owner){
+async function addQuestion(name, description, owner){
   validateName(name);
   await validateOwner(owner);
 
   let question = {
     name: name,
-    discussion: discussion,
+    description: description,
     avatar: null,
     owner: owner,
     photos: []}
@@ -125,11 +125,11 @@ async function addQuestion(name, discussion, owner){
 async function updateQuestion(id, question){
   validateId(id);
   validateName(question.name);
-  validateDiscussion(question.discussion);
+  validateDiscussion(question.description);
 
   let updateQuestion = {
     name: question.name,
-    discussion: discussion,
+    description: description,
   }
 
   const questionsCollection = await questions();
