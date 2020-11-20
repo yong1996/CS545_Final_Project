@@ -42,7 +42,7 @@ $(function() {
             contentType: "application/json",
             data: JSON.stringify({
                 title: $("#add-question-form-title").val(),
-                type: $("#add-question-form-question").val()
+                description: $("#add-question-form-description").val()
             }),
             success: function(data){
                 if (data.redirect) {
@@ -51,7 +51,7 @@ $(function() {
                 }
                 if (data.status == "success") {
                     $('#add-question-modal').modal('hide'); 
-                    addQuestion(data.question._id, data.question.title, data.question.question);
+                    addQuestion(data.question._id, data.question.title, data.question.description);
                     $('#no-data-found-alert-dog').hide();
                     success("new question is added");
                 } else {
@@ -68,7 +68,7 @@ $(function() {
         });
     });
   
-    function addQuestion(id, title, question) {
+    function addQuestion(id, title, description) {
         let questionContainer = $('<div class="col-lg-3 col-md-4 col-6 mb-4 dog-container">');
         let button = $('<button type="button" class="btn btn-danger btn-sm btn-round btn-shadow btn-delete-dog position-absolute">delete</button>')
         let card = $('<div class="card">');
