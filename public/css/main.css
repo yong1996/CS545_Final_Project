@@ -14,18 +14,18 @@
     z-index: 99;
 }
 
-.dog-img-container:hover .btn-delete-photo{
+.question-img-container:hover .btn-delete-photo{
     display: block;
 }
 
-.btn-delete-dog {
+.btn-delete-question {
     display: none;
     right: 15px;
     top: 10px;
     z-index: 99;
 }
 
-.dog-container:hover .btn-delete-dog{
+.question-container:hover .btn-delete-question{
     display: block;
 }
 
@@ -62,23 +62,9 @@
     margin: 10px 0;
 }
 
-.dog-health-info h2, .dog-info-container h2{
-    font-size: 24px;
-    display: inline;
-}
-
 p.no-data-found-alert {
     font-size: 24px;
     color: #32315d;
-}
-
-.dog-health-info p, .dog-info-container p{
-    font-size: 30px;
-    font-weight: 400;
-    display: inline;
-    color: #475dda;
-    margin-left: 5px;
-    margin-right: 15px;
 }
 
 #comment-form label {
