@@ -136,7 +136,7 @@ $(function() {
 
     $('#change-password-form').submit(function(event){
         event.preventDefault();
-        if ($("#change-password-form-new-password").val().length < 8) {
+        if ($("#change-password-form-new-password").val().length < 1) {
             error("length of password is less than 8");
             return;
         }
