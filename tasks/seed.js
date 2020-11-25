@@ -63,7 +63,7 @@ const main = async () => {
         userId1
     );
     user1question1 = question1._id.toString();
-    await uploadQuestionAvatar(user1question1, 'public/img/question/logo.png');
+    await uploadQuestionAvatar(user1question1, 'public/img/question/dog.jpg');
     
     console.log("a's question1 created");
     await db.serverConfig.close();

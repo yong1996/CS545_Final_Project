@@ -9,7 +9,7 @@
             <div class="col-8 col-lg-10 user-description">
                 <h1>{{user.username}}</h1>
                 {{#if user.questions}}
-                <p>This user has {{user.questions.length}} {{#greaterThan user.questions.length 1}}questions{{else}}question{{/greaterThan}}</p>                
+                <p>This user has {{user.questions.length}} {{#greaterThan user.questions.length 1}}post{{else}}question{{/greaterThan}}</p>                
                 {{else}}
                 <p>This user doesn't have question</p>
                 {{/if}}
@@ -21,7 +21,7 @@
 {{#if user.questions}}
 <section class="my-5">
     <div class="container">
-        <h1>All questions</h1>
+        <h1>All post</h1>
         <div id="questions-container" class="row questions-container">
             {{#each user.questions}}
             <div class="col-lg-3 col-md-4 col-6 mb-4 question-container">
@@ -35,7 +35,7 @@
                             {{/if}}
                         </div>
                         <div class="card-body">
-                            <h2 class="card-title display-4 mb-0">{{name}}</h2>
+                            <h2 class="card-title display-4 mb-0">{{title}}</h2>
                             <p class="card-text"><span class="card-text-gender">{{gender}}</span> {{type}}</p>
                         </div>
                     </a>

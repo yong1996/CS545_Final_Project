@@ -149,7 +149,7 @@
 
 <section class="my-5">
     <div class="container">
-        <h1>Your questions</h1>
+        <h1>Your post</h1>
         <p {{#if user.questions}}style="display: none"{{/if}} id="no-data-found-alert-question" class="no-data-found-alert">No questions found. Please add your questions.</p>
         <div id="questions-container" class="row questions-container">
             {{#each user.questions}}
@@ -165,8 +165,7 @@
                             {{/if}}
                         </div>
                         <div class="card-body">
-                            <h2 class="card-title display-4 mb-0">{{name}}</h2>
-                            <p class="card-text"><span class="card-text-gender">{{gender}}</span> {{type}}</p>
+                            <h2 class="card-title display-4 mb-0">{{title}}</h2>
                         </div>
                     </a>
                 </div>
