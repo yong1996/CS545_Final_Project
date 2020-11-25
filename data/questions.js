@@ -17,49 +17,6 @@ function convertDateToString(date) {
   return date.getFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
 }
 
-function calculateAge(date) {
-  let ageDifMs = Date.now() - date.getTime();
-  let ageDate = new Date(ageDifMs);
-  let yearAge = Math.abs(ageDate.getUTCFullYear() - 1970);
-  // year age 
-  return yearAge;
-}
-
-function getQuestionHealthCondition(questionType, age, weight, gender){
-  const questionData = breedData.breed;
-  if(questionData[questionType] === null || !weight){
-    return "not available";
-  }
-  
-  if (age < 1){
-    return "not available";
-  }
-  
-  if(gender === "Other"){
-    return "not available";
-  } 
-    
-  
-  const stdMin = questionData[questionType][gender].wMin;
-  const stdMax = questionData[questionType][gender].wMax;
-  if(stdMin === null || stdMax === null){
-    return "not available";
-  }
-
-  if (stdMin == stdMax){
-    stdMin = stdMin - 5;
-    stdMax = stdMax + 5;
-  }
-  if (weight > stdMin & weight < stdMax){
-    return "excellent";
-  }else if( weight < stdMin){
-    return "too thin";
-  }else{
-    return "too heavy";
-  }
-  
-}
-
 function ComparableDate(hw1,hw2){
   if (isNaN(Date.parse(hw1.date))) throw "date1 is invalid";
   date1 = Date.parse(hw1.date);
@@ -80,10 +37,10 @@ function validateId(id){
   if (!ObjectId.isValid(id)) throw "id is invalid";
 }
 
-function validateName(name){
-  if (!name) throw "name is undefinded";
-  if (name.constructor !== String) throw "name is not a string";
-  if (name.length > 30) throw "length name is greater than 30";
+function validateTitle(title){
+  if (!title) throw "title is undefinded";
+  if (title.constructor !== String) throw "title is not a string";
+  if (title.length > 30) throw "length title is greater than 30";
 }
 
 async function validateOwner(owner){
@@ -98,12 +55,12 @@ async function validateOwner(owner){
 
 // ======================================================
 // Body functions
-async function addQuestion(name, description, owner){
-  validateName(name);
+async function addQuestion(title, description, owner){
+  validateTitle(title);
   await validateOwner(owner);
 
   let question = {
-    name: name,
+    title: title,
     description: description,
     avatar: null,
     owner: owner,
@@ -124,11 +81,11 @@ async function addQuestion(name, description, owner){
 
 async function updateQuestion(id, question){
   validateId(id);
-  validateName(question.name);
+  validateTitle(question.title);
   validateDiscussion(question.description);
 
   let updateQuestion = {
-    name: question.name,
+    title: question.title,
     description: description,
   }
 

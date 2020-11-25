@@ -34,17 +34,15 @@ $(function() {
         });
     });
 
-    $("#add-dog-form").submit(function(event) {
+    $("#add-question-form").submit(function(event) {
         event.preventDefault();
         $.ajax({
             method: "POST",
-            url: "/dog",
+            url: "/question",
             contentType: "application/json",
             data: JSON.stringify({
-                name: $("#add-dog-form-name").val(),
-                type: $("#add-dog-form-type").val(),
-                gender: $("input[name='gender']:checked").val(),
-                dob: $("#add-dog-form-dob").val()
+                title: $("#add-question-form-title").val(),
+                description: $("#add-question-form-description").val()
             }),
             success: function(data){
                 if (data.redirect) {
@@ -52,10 +50,10 @@ $(function() {
                     return;
                 }
                 if (data.status == "success") {
-                    $('#add-dog-modal').modal('hide'); 
-                    addDog(data.dog._id, data.dog.name, data.dog.gender, data.dog.type, data.dog.age, data.dog.avatar);
+                    $('#add-question-modal').modal('hide'); 
+                    addQuestion(data.question._id, data.question.title, data.question.description);
                     $('#no-data-found-alert-dog').hide();
-                    success("new dog is added");
+                    success("new question is added");
                 } else {
                     error(data.errorMessage);
                 }
@@ -70,8 +68,8 @@ $(function() {
         });
     });
   
-    function addDog(id, name, gender, type, age, avatar) {
-        let dogContainer = $('<div class="col-lg-3 col-md-4 col-6 mb-4 dog-container">');
+    function addQuestion(id, title, description) {
+        let questionContainer = $('<div class="col-lg-3 col-md-4 col-6 mb-4 dog-container">');
         let button = $('<button type="button" class="btn btn-danger btn-sm btn-round btn-shadow btn-delete-dog position-absolute">delete</button>')
         let card = $('<div class="card">');
         let a = $('<a href="/dog/' + id + '">');
@@ -82,22 +80,21 @@ $(function() {
         }
         avatarContainer.append(img);
         let cardbody = $('<div class="card-body">');
-        let cardtitle = $('<h2 class="card-title display-4 mb-0">' + name + '</h2>');
-        let cardtest = $('<p class="card-text"><span class="card-text-gender">' + gender + '</span> ' + type + '</p>');
-        cardbody.append(cardtitle).append(cardtest);
+        let cardtitle = $('<h2 class="card-title display-4 mb-0">' + title + '</h2>');
+        cardbody.append(cardtitle)
         a.append(avatarContainer).append(cardbody);
         card.append(a);
-        dogContainer.append(button);
-        dogContainer.append(card);
+        questionContainer.append(button);
+        questionContainer.append(card);
 
-        $('#dogs-container').prepend(dogContainer);
+        $('#dogs-container').prepend(questionContainer);
     }
 
     $('body').on('click', '.dog-container button', function() {
         startLoading();
 
         let dogSingleContainer = $(this).parent();
-        let dogContainer = dogSingleContainer.parent();
+        let questionContainer = dogSingleContainer.parent();
         let dogURI = $(this).next().find('a').attr('href');
         $.ajax({
             method: "DELETE",
@@ -109,7 +106,7 @@ $(function() {
                 }
                 if (data.status == "success") {
                     dogSingleContainer.remove();
-                    if (dogContainer.children().length === 0) {
+                    if (questionContainer.children().length === 0) {
                         $('#no-data-found-alert-dog').show();
                     }
                     success("dog is deleted");
@@ -176,11 +173,5 @@ $(function() {
                 }
             }
         });
-    });
-
-    $('#add-dog-form-dob').datepicker({
-        format: "yyyy-mm-dd",
-        orientation: "top",
-        autoclose: true
     });
 });
