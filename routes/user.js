@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const breedData = require("../data/breed");
 const usersData = require("../data/user");
 const multer  = require("multer");
 const upload = multer({dest:"./public/img/upload"});
@@ -9,12 +8,10 @@ const middleware = require('./middleware');
 router.get('/', middleware.loginRequired, async (req, res) => {
   try {
     let user = await usersData.getUser(req.session.userid);
-    let types = breedData.getBreeds();
     data = {
       title: "Profile",
       username : req.session.username,
       user : user,
-      types : types
     }
     res.render('user/single_user_owner', data);
   } catch (e) {

@@ -4,7 +4,6 @@ const users = mongoCollections.users;
 // const comments = mongoCollections.comments;
 const imgData = require("./img");
 const commentData = require("./comments");
-const breedData = require("./breed");
 const ObjectId = require('mongodb').ObjectID;
 
 // ======================================================
@@ -15,18 +14,6 @@ function firstLetterUpperCase(str) {
 
 function convertDateToString(date) {
   return date.getFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
-}
-
-function ComparableDate(hw1,hw2){
-  if (isNaN(Date.parse(hw1.date))) throw "date1 is invalid";
-  date1 = Date.parse(hw1.date);
-  date1 = new Date(date1);
-
-  if (isNaN(Date.parse(hw2.date))) throw "date2 is invalid";
-  date2 = Date.parse(hw2.date);
-  date2 = new Date(date2);
-
-  return date1 - date2
 }
 
 // ======================================================

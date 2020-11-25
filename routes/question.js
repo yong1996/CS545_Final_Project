@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const questionData = require("../data/questions");
 const commentData = require("../data/comments");
-const breedData = require("../data/breed");
 const multer  = require("multer");
 const upload = multer({dest:"./public/img/upload"});
 const middleware = require('./middleware');
@@ -12,7 +11,7 @@ const xss = require("xss");
 router.get('/', async (req, res) => {
     try{
       let questions = await questionData.getAllQuestions();
-      
+
       let pageData = helper.pagination(questions, req.query.page, 12);
       data = {
         title: "All Questions",
@@ -30,11 +29,11 @@ router.get('/', async (req, res) => {
 
 router.post('/', middleware.loginRequiredJson, async (req, res) => {
     try{
-      let name = xss(req.body.name);
+      let title = xss(req.body.title);
       let discussion = xss(req.body.discussion);
       let owner = req.session.userid;
 
-      let question = await questionData.addQuestion(name, discussion, owner);
+      let question = await questionData.addQuestion(title, discussion, owner);
       res.json({ status: "success", question: question });
     } catch (e) {
       res.status(400);
@@ -53,14 +52,13 @@ router.get('/:id', async (req, res) => {
       let commentPagedData = helper.pagination(comments, 1, 3);
 
       data = {
-        title: question.name, 
+        title: question.title, 
         question: question, 
         photos: photoPagedData.photos,
         isPhotoLastPage: photoPagedData.isLastPage,
         comments : commentPagedData.data,
         isCommentLastPage: commentPagedData.isLastPage,
         username : req.session.username,
-        types: breedData.getBreeds()
       }
 
       if (question.owner === req.session.username)
@@ -89,7 +87,7 @@ router.put('/:id', middleware.loginRequiredJson, async (req, res) => {
     try{
       let questionId = req.params.id;
       let question = req.body.question;
-      question.name = xss(question.name);
+      question.title = xss(question.title);
       question.discussion = xss(question.discussion);
 
       await questionData.checkOwner(req.session.userid, questionId);

@@ -1,7 +1,7 @@
 $(function() {
     $('#signup-form').submit(function(event) {
         let letterNumber = /^[0-9a-zA-Z]+$/;
-        if ($('#username').val().length < 6) {
+        if ($('#username').val().length < 1) {
             event.preventDefault();
             error("length of username is less than 6");
             return;
@@ -11,7 +11,7 @@ $(function() {
             error("username should contain only letter and number");
             return;
         }
-        if ($('#password').val().length < 8) {
+        if ($('#password').val().length < 1) {
             event.preventDefault();
             error("length of password is less than 8");
             return;
