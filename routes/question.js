@@ -12,9 +12,7 @@ const xss = require("xss");
 router.get('/', async (req, res) => {
     try{
       let questions = await questionData.getAllQuestions();
-      console.log(questions);
       
-
       let pageData = helper.pagination(questions, req.query.page, 12);
       data = {
         title: "All Questions",
