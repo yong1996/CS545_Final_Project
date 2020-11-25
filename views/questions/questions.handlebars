@@ -14,15 +14,14 @@
                   {{/if}}
                 </div>
                 <div class="card-body">
-                    <h2 class="display-4">{{name}}</h2>
-                    <p class="card-text"><span class="card-text-gender">{{gender}}</span> {{type}}</p>
+                    <h2 class="display-4">{{title}}</h2>
                 </div>
               </a>
           </div>
       </div>    
       {{/each}}
     </div>
-    {{#pagination totalPage currentPage}}
+    {{!-- {{#pagination totalPage currentPage}}
     <nav>
       <ul class="pagination justify-content-center">
         {{#if @previousPage}}
@@ -48,7 +47,7 @@
         {{/if}}
       </ul>
     </nav>
-    {{/pagination}}
+    {{/pagination}} --}}
   </div>
 </section>
 
