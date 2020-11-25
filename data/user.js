@@ -62,16 +62,16 @@ async function getUser(id){
   const userInfo = await usersCollection.findOne({ _id: parsedId });
   if (userInfo == null) throw "Could not find user successfully";
 
-  // let questionslist = [];
-  // for (let question of userInfo.questions) {
-  //   questionslist.push(await questionData.getQuestion(question));
-  // }
-  // userInfo.questions = questionslist;
+  let questionslist = [];
+  for (let question of userInfo.questions) {
+    questionslist.push(await questionData.getQuestion(question));
+  }
+  userInfo.questions = questionslist;
 
-  // if (userInfo.avatar) {
-  //   let avatar = await imgData.getPhotoDataId(userInfo.avatar);
-  //   userInfo.avatar = avatar;
-  // }
+  if (userInfo.avatar) {
+    let avatar = await imgData.getPhotoDataId(userInfo.avatar);
+    userInfo.avatar = avatar;
+  }
   
   return userInfo;
 }
@@ -83,16 +83,16 @@ async function getUserByUsername(username){
   const userInfo = await usersCollection.findOne({ username: username });
   if (userInfo == null) throw "Could not find user successfully";
 
-  // let questionslist = [];
-  // for (let question of userInfo.questions) {
-  //   questionslist.push(await questionData.getQuestion(question));
-  // }
-  // userInfo.questions = questionslist;
+  let questionslist = [];
+  for (let question of userInfo.questions) {
+    questionslist.push(await questionData.getQuestion(question));
+  }
+  userInfo.questions = questionslist;
 
-  // if (userInfo.avatar) {
-  //   let avatar = await imgData.getPhotoDataId(userInfo.avatar);
-  //   userInfo.avatar = avatar;
-  // }
+  if (userInfo.avatar) {
+    let avatar = await imgData.getPhotoDataId(userInfo.avatar);
+    userInfo.avatar = avatar;
+  }
   
   return userInfo;
 }
