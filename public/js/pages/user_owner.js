@@ -42,6 +42,8 @@ $(function() {
             contentType: "application/json",
             data: JSON.stringify({
                 title: $("#add-question-form-title").val(),
+                type: $("#add-question-form-description").val(),
+                type: $("#add-question-form-type").val(),
                 description: $("#add-question-form-description").val()
             }),
             success: function(data){

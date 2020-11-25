@@ -115,7 +115,7 @@ $(function() {
                     $('#upload-photo-modal').modal('hide'); 
                     $("#photos").empty();
                     for(let photo of data.photos) {
-                        addDogPhoto(photo.id, photo.photo, true);
+                        addQuestionPhoto(photo.id, photo.photo, true);
                     }
                     if (data.isLastPage) $("#load-more-photos").hide();
                     else $("#load-more-photos").show();
@@ -154,7 +154,7 @@ $(function() {
                     $("#photos").empty();
                     if (data.photos.length) {
                         for(let photo of data.photos) {
-                            addDogPhoto(photo.id, photo.photo, true);
+                            addQuestionPhoto(photo.id, photo.photo, true);
                         }
                     } else {
                         $("#no-data-found-alert-photo").show();
