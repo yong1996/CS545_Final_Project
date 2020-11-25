@@ -30,10 +30,10 @@ router.get('/', async (req, res) => {
 router.post('/', middleware.loginRequiredJson, async (req, res) => {
     try{
       let title = xss(req.body.title);
-      let discussion = xss(req.body.discussion);
+      let discription = xss(req.body.discription);
       let owner = req.session.userid;
 
-      let question = await questionData.addQuestion(title, discussion, owner);
+      let question = await questionData.addQuestion(title, discription, owner);
       res.json({ status: "success", question: question });
     } catch (e) {
       res.status(400);
@@ -88,7 +88,7 @@ router.put('/:id', middleware.loginRequiredJson, async (req, res) => {
       let questionId = req.params.id;
       let question = req.body.question;
       question.title = xss(question.title);
-      question.discussion = xss(question.discussion);
+      question.discription = xss(question.discription);
 
       await questionData.checkOwner(req.session.userid, questionId);
       question = await questionData.updateQuestion(questionId, question);

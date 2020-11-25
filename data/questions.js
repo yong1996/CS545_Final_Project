@@ -69,7 +69,7 @@ async function addQuestion(title, description, owner){
 async function updateQuestion(id, question){
   validateId(id);
   validateTitle(question.title);
-  validateDiscussion(question.description);
+  validateDiscription(question.description);
 
   let updateQuestion = {
     title: question.title,
