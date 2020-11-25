@@ -224,25 +224,7 @@
 <script src="/public/vendor/chartjs/Chart.js"></script>
 <script src="/public/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script src="/public/vendor/lightbox2/js/lightbox.min.js"></script>
-<script src="/public/js/health_chart.js"></script>
 <script src="/public/js/question_utils.js"></script>
 <script src="/public/js/pages/question_owner.js"></script>
-
-{{#if question.heightWeight}}
-<script>
-{{#each question.healthDateList}}
-addLabel(bmiChart, "{{ this }}");
-addLabel(weightChart, "{{ this }}");
-{{/each}}
-
-{{#each question.bmiList}}
-addData(bmiChart, {{ this }});
-{{/each}}
-
-{{#each question.weightList}}
-addData(weightChart, {{ this }});
-{{/each}}
-</script>
-{{/if}}
 
 {{/section}}
