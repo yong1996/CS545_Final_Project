@@ -10,28 +10,17 @@
                 {{#if question.avatar}}
                 <img src="{{ question.avatar }}" class="img-fluid avatar" alt="question avatar">                
                 {{else}}
-                <img src="/public/img/avatar/default-question.png" class="img-fluid avatar" alt="question avatar">
+                <img src="/public/img/avatar/default-dog.png" class="img-fluid avatar" alt="question avatar">
                 {{/if}}
                 </div>
             </div>
             <div class="col-9">
                 <div class="question-info-container">
-                    <h1><span id="question-name">{{ question.name }}</span></h1>
-                    <h2>Type</h2>
-                    <p id="question-type">{{ question.type }}</p>
+                    <h2>Title: <span id="question-name">{{ question.title }}</span></h2>
+                    {{!-- <h2>Type</h2>
+                    <p id="question-type">{{ question.type }}</p> --}}
                     <div>
-                        <h2>Gender</h2>
-                        <p id="question-gender">{{ question.gender }}</p>
-                        <h2>Age</h2>
-                        <p id="question-age">{{ question.age }}</p>
-                    </div>
-                    <div>
-                        <h2>Birthday</h2>
-                        <p id="question-dob">{{ question.dob }}</p>
-                    </div>
-                    <div>
-                        <h2>Owner</h2>
-                        <p id="question-owner"><a href="/user/{{ question.owner }}">{{ question.owner }}</a></p>
+                        <h2>Publisher: <span id="question-owner"><a href="/user/{{ question.owner }}">{{ question.owner }}</a></span></h2>
                     </div>
                 </div>
             </div>
