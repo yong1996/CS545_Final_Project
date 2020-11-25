@@ -10,27 +10,6 @@ if($("#photos").length) {
     });
 }
 
-// chart
-let updateLabelAndData = function(chart, label, data) {
-    chart.data.labels = label;
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data = data;
-    });
-    chart.update();
-}
-
-let addLabel = function(chart, label) {
-    chart.data.labels.push(label);
-    chart.update();
-}
-
-let addData = function(chart, data) {
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-    });
-    chart.update();
-}
-
 let addComment = function(comment) {
     let commentContainer = $('<div class="row single-comment">');
     let avatarContainer = $('<div class="col-2">');
@@ -54,10 +33,10 @@ let addComment = function(comment) {
     $("#comments").append(commentContainer);
 }
 
-let addDogPhoto = function(id, photo, isShowDelete) {
-    let imgContainer = $('<div class="col-lg-3 col-6 my-3 dog-img-container">');
-    let lightboxContainer = $('<a href="' + photo + '" data-alt="dog photos" data-lightbox="photos">');
-    lightboxContainer.append('<img id="' + id + '" src="' + photo + '" class="dog-img img-fluid rounded w-100" alt="dog photos" />');
+let addQuestionPhoto = function(id, photo, isShowDelete) {
+    let imgContainer = $('<div class="col-lg-3 col-6 my-3 question-img-container">');
+    let lightboxContainer = $('<a href="' + photo + '" data-alt="question photos" data-lightbox="photos">');
+    lightboxContainer.append('<img id="' + id + '" src="' + photo + '" class="question-img img-fluid rounded w-100" alt="question photos" />');
     if (isShowDelete) {
         imgContainer.append('<button type="button" class="btn btn-danger btn-sm btn-round btn-shadow btn-delete-photo position-absolute">delete</button>');
     }
@@ -161,7 +140,7 @@ let initLoadMorePhoto = function(isShowDelete) {
                 if (data.status == "success") {
                     $("#load-more-photos").data("current-page", nextPage);
                     for (let photo of data.photos) {
-                        addDogPhoto(photo.id, photo.photo, isShowDelete);
+                        addQuestionPhoto(photo.id, photo.photo, isShowDelete);
                     }
                     if (data.isLastPage) {
                         $("#load-more-photos").hide();

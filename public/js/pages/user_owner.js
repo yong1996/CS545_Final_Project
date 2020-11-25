@@ -52,7 +52,7 @@ $(function() {
                 if (data.status == "success") {
                     $('#add-question-modal').modal('hide'); 
                     addQuestion(data.question._id, data.question.title, data.question.description);
-                    $('#no-data-found-alert-dog').hide();
+                    $('#no-data-found-alert-question').hide();
                     success("new question is added");
                 } else {
                     error(data.errorMessage);
@@ -69,14 +69,14 @@ $(function() {
     });
   
     function addQuestion(id, title, description) {
-        let questionContainer = $('<div class="col-lg-3 col-md-4 col-6 mb-4 dog-container">');
-        let button = $('<button type="button" class="btn btn-danger btn-sm btn-round btn-shadow btn-delete-dog position-absolute">delete</button>')
+        let questionContainer = $('<div class="col-lg-3 col-md-4 col-6 mb-4 question-container">');
+        let button = $('<button type="button" class="btn btn-danger btn-sm btn-round btn-shadow btn-delete-question position-absolute">delete</button>')
         let card = $('<div class="card">');
-        let a = $('<a href="/dog/' + id + '">');
+        let a = $('<a href="/question/' + id + '">');
         let avatarContainer = $('<div class="avatar-container">')
-        let img = $('<img src="/public/img/avatar/default-dog.png" class="card-img-top" alt="dog avatar">');
+        let img = $('<img src="/public/img/avatar/default-question.png" class="card-img-top" alt="question avatar">');
         if (avatar) {
-            img = $('<img src="' + avatar + '" class="card-img-top" alt="dog avatar">');
+            img = $('<img src="' + avatar + '" class="card-img-top" alt="question avatar">');
         }
         avatarContainer.append(img);
         let cardbody = $('<div class="card-body">');
@@ -87,29 +87,29 @@ $(function() {
         questionContainer.append(button);
         questionContainer.append(card);
 
-        $('#dogs-container').prepend(questionContainer);
+        $('#questions-container').prepend(questionContainer);
     }
 
-    $('body').on('click', '.dog-container button', function() {
+    $('body').on('click', '.question-container button', function() {
         startLoading();
 
-        let dogSingleContainer = $(this).parent();
-        let questionContainer = dogSingleContainer.parent();
-        let dogURI = $(this).next().find('a').attr('href');
+        let questionSingleContainer = $(this).parent();
+        let questionContainer = questionSingleContainer.parent();
+        let questionURI = $(this).next().find('a').attr('href');
         $.ajax({
             method: "DELETE",
-            url: dogURI,
+            url: questionURI,
             success: function(data){
                 if (data.redirect) {
                     window.location.href = data.redirect;
                     return;
                 }
                 if (data.status == "success") {
-                    dogSingleContainer.remove();
+                    questionSingleContainer.remove();
                     if (questionContainer.children().length === 0) {
-                        $('#no-data-found-alert-dog').show();
+                        $('#no-data-found-alert-question').show();
                     }
-                    success("dog is deleted");
+                    success("question is deleted");
                 } else {
                     error(data.errorMessage);
                 }
