@@ -22,12 +22,11 @@
                     <div>
                         <h2>Publisher: <span id="question-owner"><a href="/user/{{ question.owner }}">{{ question.owner }}</a></span></h2>
                         <h2>Pet: <span id="question-pet">{{ question.pet }}</span></h2>
-                        <h2>Type: <span id="question-type">{{ question.type }}</span></h2>
                     </div>
                 </div>
             </div>
-            <div>
-                <h1>Question: <span id="question-description">{{ question.description }}</span></h1>
+            <div class="container">
+                <h1>{{ question.type }}: <span id="question-description">{{ question.description }}</span></h1>
             </div>
         </div>
     </div>
