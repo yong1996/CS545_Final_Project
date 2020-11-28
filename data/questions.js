@@ -53,7 +53,8 @@ async function addQuestion(title, pet, type, description, owner){
     description: description,
     avatar: null,
     owner: owner,
-    photos: []}
+    photos: []
+  }
 
   const questionsCollection = await questions();
   const insertedInfo = await questionsCollection.insertOne(question);
