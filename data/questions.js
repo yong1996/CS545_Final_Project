@@ -46,6 +46,9 @@ async function addQuestion(title, pet, type, description, owner){
   validateTitle(title);
   await validateOwner(owner);
 
+  console.log(title, pet, type, description, owner);
+  
+
   let question = {
     title: title,
     pet: pet,
@@ -66,6 +69,8 @@ async function addQuestion(title, pet, type, description, owner){
                                         {$push: {questions: { $each: [ ObjectId(questionId).toString() ], $position: 0}}});
   if (updateInfo.modifiedCount === 0) throw "could not add the question to the user";
 
+  console.log(await getQuestion(questionId.toString()));
+  
   return await getQuestion(questionId.toString());
 }
 

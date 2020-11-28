@@ -35,10 +35,6 @@ $(function() {
     });
 
     $("#add-question-form").submit(function(event) {
-        console.log("type "+$("input[name='qtype']:checked"));
-        console.log("type0 "+$("input[name='qtype']:checked")[0]);
-        console.log("type1 "+$("input[name='qtype']:checked")[1]);
-        
         event.preventDefault();
         $.ajax({
             method: "POST",
