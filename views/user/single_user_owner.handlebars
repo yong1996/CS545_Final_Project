@@ -83,22 +83,22 @@
                         <label>Question Type</label>
                         <div class="radio-group row-fluid text-center">
                             <div class="col-4 p-0">
-                                <input class="radio" type="radio" id="add-question-form-type-help" name="type" value="Help">
+                                <input class="radio" type="radio" id="add-question-form-type-help" name="qtype" value="Help">
                                 <label for="add-question-form-type-help">Help</label>
                             </div>
                             <div class="col-4 p-0">
-                                <input class="radio" type="radio" id="add-question-form-type-question" name="type" value="Question">
+                                <input class="radio" type="radio" id="add-question-form-type-question" name="qtype" value="Question">
                                 <label for="add-question-form-type-question">Question</label>
                             </div>
                             <div class="col-4 p-0">
-                                <input class="radio" type="radio" id="add-question-form-type-other" name="type" value="Other">
+                                <input class="radio" type="radio" id="add-question-form-type-other" name="qtype" value="Other">
                                 <label for="add-question-form-type-other">Other</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="add-question-form-description">Description</label>
-                        <textarea class="form-control add-question-form-description" name="description" id="comment-form-description" rows="6" maxlength="160" placeholder="Write your description here ..."></textarea>
+                        <textarea class="form-control add-question-form-description" name="description" id="add-question-form-description" rows="6" maxlength="160" placeholder="Write your description here ..."></textarea>
                     </div>
                 </div>
 
@@ -166,6 +166,7 @@
                         </div>
                         <div class="card-body">
                             <h2 class="card-title display-4 mb-0">{{title}}</h2>
+                            <p class="card-text"><span class="card-text-pet">{{pet}}</span> {{type}}</p>
                         </div>
                     </a>
                 </div>

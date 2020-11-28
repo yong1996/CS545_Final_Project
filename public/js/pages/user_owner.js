@@ -35,6 +35,10 @@ $(function() {
     });
 
     $("#add-question-form").submit(function(event) {
+        console.log("type "+$("input[name='qtype']:checked"));
+        console.log("type0 "+$("input[name='qtype']:checked")[0]);
+        console.log("type1 "+$("input[name='qtype']:checked")[1]);
+        
         event.preventDefault();
         $.ajax({
             method: "POST",
@@ -43,7 +47,7 @@ $(function() {
             data: JSON.stringify({
                 title: $("#add-question-form-title").val(),
                 pet: $("#add-question-form-pet").val(),
-                type: $("#add-question-form-type").val(),
+                type: $("input[name='qtype']:checked").val(),
                 description: $("#add-question-form-description").val()
             }),
             success: function(data){
@@ -53,7 +57,7 @@ $(function() {
                 }
                 if (data.status == "success") {
                     $('#add-question-modal').modal('hide'); 
-                    addQuestion(data.question._id, data.question.title, data.question.description);
+                    addQuestion(data.question._id, data.question.title, data.question.pet, data.question.type, data.question.avatar);
                     $('#no-data-found-alert-question').hide();
                     success("new question is added");
                 } else {
@@ -70,20 +74,21 @@ $(function() {
         });
     });
   
-    function addQuestion(id, title) {
+    function addQuestion(id, title, pet, type, avatar) {
         let questionContainer = $('<div class="col-lg-3 col-md-4 col-6 mb-4 question-container">');
         let button = $('<button type="button" class="btn btn-danger btn-sm btn-round btn-shadow btn-delete-question position-absolute">delete</button>')
         let card = $('<div class="card">');
         let a = $('<a href="/question/' + id + '">');
         let avatarContainer = $('<div class="avatar-container">')
-        let img = $('<img src="/public/img/avatar/default-question.png" class="card-img-top" alt="question avatar">');
+        let img = $('<img src="/public/img/avatar/default-dog.png" class="card-img-top" alt="question avatar">');
         if (avatar) {
             img = $('<img src="' + avatar + '" class="card-img-top" alt="question avatar">');
         }
         avatarContainer.append(img);
         let cardbody = $('<div class="card-body">');
         let cardtitle = $('<h2 class="card-title display-4 mb-0">' + title + '</h2>');
-        cardbody.append(cardtitle)
+        let cardtest = $('<p class="card-text"><span class="card-text-pet">' + pet + '</span> ' + type + '</p>');
+        cardbody.append(cardtitle).append(cardtest);
         a.append(avatarContainer).append(cardbody);
         card.append(a);
         questionContainer.append(button);

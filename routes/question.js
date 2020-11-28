@@ -29,6 +29,10 @@ router.get('/', async (req, res) => {
 
 router.post('/', middleware.loginRequiredJson, async (req, res) => {
     try{
+      console.log("add question:");
+      
+      console.log(req.body);
+      
       let title = xss(req.body.title);
       let discription = xss(req.body.discription);
       let pet = req.body.pet;
@@ -87,6 +91,9 @@ router.delete('/:id', middleware.loginRequiredJson, async (req, res) => {
 
 router.put('/:id', middleware.loginRequiredJson, async (req, res) => {
     try{
+      console.log("update question:");
+      console.log(req.body.question);
+
       let questionId = req.params.id;
       let question = req.body.question;
       question.title = xss(question.title);
