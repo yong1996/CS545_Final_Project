@@ -29,17 +29,13 @@ router.get('/', async (req, res) => {
 
 router.post('/', middleware.loginRequiredJson, async (req, res) => {
     try{
-      console.log("add question:");
-      
-      console.log(req.body);
-      
       let title = xss(req.body.title);
-      let discription = xss(req.body.discription);
+      let description = xss(req.body.description);
       let pet = req.body.pet;
       let type = req.body.type;
       let owner = req.session.userid;
-
-      let question = await questionData.addQuestion(title, pet, type, discription, owner);
+      
+      let question = await questionData.addQuestion(title, pet, type, description, owner);
       res.json({ status: "success", question: question });
     } catch (e) {
       res.status(400);
@@ -97,7 +93,7 @@ router.put('/:id', middleware.loginRequiredJson, async (req, res) => {
       let questionId = req.params.id;
       let question = req.body.question;
       question.title = xss(question.title);
-      question.discription = xss(question.discription);
+      question.description = xss(question.description);
       question.pet = question.pet;
       question.type = question.type;
 
