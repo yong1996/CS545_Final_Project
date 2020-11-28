@@ -31,9 +31,11 @@ router.post('/', middleware.loginRequiredJson, async (req, res) => {
     try{
       let title = xss(req.body.title);
       let discription = xss(req.body.discription);
+      let pet = req.body.pet;
+      let type = req.body.type;
       let owner = req.session.userid;
 
-      let question = await questionData.addQuestion(title, discription, owner);
+      let question = await questionData.addQuestion(title, pet, type, discription, owner);
       res.json({ status: "success", question: question });
     } catch (e) {
       res.status(400);
@@ -89,6 +91,8 @@ router.put('/:id', middleware.loginRequiredJson, async (req, res) => {
       let question = req.body.question;
       question.title = xss(question.title);
       question.discription = xss(question.discription);
+      question.pet = question.pet;
+      question.type = question.type;
 
       await questionData.checkOwner(req.session.userid, questionId);
       question = await questionData.updateQuestion(questionId, question);

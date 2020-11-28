@@ -42,7 +42,7 @@ $(function() {
             contentType: "application/json",
             data: JSON.stringify({
                 title: $("#add-question-form-title").val(),
-                type: $("#add-question-form-description").val(),
+                pet: $("#add-question-form-pet").val(),
                 type: $("#add-question-form-type").val(),
                 description: $("#add-question-form-description").val()
             }),
@@ -70,7 +70,7 @@ $(function() {
         });
     });
   
-    function addQuestion(id, title, description) {
+    function addQuestion(id, title) {
         let questionContainer = $('<div class="col-lg-3 col-md-4 col-6 mb-4 question-container">');
         let button = $('<button type="button" class="btn btn-danger btn-sm btn-round btn-shadow btn-delete-question position-absolute">delete</button>')
         let card = $('<div class="card">');

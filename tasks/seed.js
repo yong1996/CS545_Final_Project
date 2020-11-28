@@ -65,6 +65,8 @@ const main = async () => {
     // =================================
     question1 = await questionData.addQuestion(
         "11",
+        "cat",
+        "help",
         "22",
         userId1
     );
@@ -72,12 +74,11 @@ const main = async () => {
     await uploadQuestionAvatar(user1question1, 'public/img/question/dog.jpg');
     console.log("a's question1 created");
 
-    // =================================
-    for (let i = 0; i < 8; i++) {
+    // =================================    
+    for (let i = 0; i < 8; i++) {        
         comment = await commentsData.addComment("You are so lovely", userId2, user1question1);
     }
     console.log("question1's comment created");
-
 
     // =================================
     await db.serverConfig.close();

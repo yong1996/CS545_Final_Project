@@ -42,12 +42,14 @@ async function validateOwner(owner){
 
 // ======================================================
 // Body functions
-async function addQuestion(title, description, owner){
+async function addQuestion(title, pet, type, description, owner){
   validateTitle(title);
   await validateOwner(owner);
 
   let question = {
     title: title,
+    pet: pet,
+    type: type,
     description: description,
     avatar: null,
     owner: owner,
@@ -73,6 +75,8 @@ async function updateQuestion(id, question){
 
   let updateQuestion = {
     title: question.title,
+    pet: question.pet,
+    type: question.type,
     description: description,
   }
 

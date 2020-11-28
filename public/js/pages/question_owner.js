@@ -68,10 +68,10 @@ $(function() {
             url: "",
             contentType: "application/json",
             data: JSON.stringify({ question : {
-                name: $("#edit-question-form-name").val(),
-                type: $("#edit-question-form-type").val(),
-                gender: $('input[name=gender]:checked').val(),
-                dob: $("#edit-question-form-dob").val()
+                title: $("#edit-question-form-title").val(),
+                pet: $("#edit-question-form-pet").val(),
+                type: $('input[name=type]:checked').val(),
+                description: $("#edit-question-form-description").val(),
             }}),
             success: function(data){
                 if (data.redirect) {
