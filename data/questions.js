@@ -72,7 +72,7 @@ async function addQuestion(title, pet, type, description, owner){
 async function updateQuestion(id, question){
   validateId(id);
   validateTitle(question.title);
-  validateDiscription(question.description);
+  validateDescription(question.description);
 
   let updateQuestion = {
     title: question.title,
