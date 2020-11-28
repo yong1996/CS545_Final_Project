@@ -80,38 +80,44 @@
             <form id="edit-question-form">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="edit-question-form-name">Name</label>
-                        <input type="text" id="edit-question-form-name" class="form-control" placeholder="name" name="name">
+                        <label for="edit-question-form-title">Title</label>
+                        <input type="text" id="edit-question-form-title" class="form-control" placeholder="title" name="title">
                     </div>
                     <div class="form-group">
-                        <label for="edit-question-form-type">Type</label>
-                        <select id="edit-question-form-type" class="custom-select form-control" name="type">
-                            {{#each types}}
+                        <label for="edit-question-form-pet">Pet Type</label>
+                        <select id="edit-question-form-pet" class="custom-select form-control" name="pet">
+                            {{!-- {{#each types}}
                             <option value="{{this}}">{{this}}</option>
-                            {{/each}}
+                            {{/each}} --}}
+                            <option value="bird">Bird</option>
+                            <option value="cat">Cat</option>
+                            <option value="dog">Dog</option>
+                            <option value="fish">Fish</option>
+                            <option value="plant">Plant</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Gender</label>
-                        <div class="radio-group row-fluid text-center">
-                            <div class="col-4 p-0">
-                                <input class="radio" type="radio" id="edit-question-form-gender-male" name="gender" value="Male">
-                                <label for="edit-question-form-gender-male">Male</label>
-                            </div>
-                            <div class="col-4 p-0">
-                                <input class="radio" type="radio" id="edit-question-form-gender-female" name="gender" value="Female">
-                                <label for="edit-question-form-gender-female">Female</label>
-                            </div>
-                            <div class="col-4 p-0">
-                                <input class="radio" type="radio" id="edit-question-form-gender-other" name="gender" value="Other">
-                                <label for="edit-question-form-gender-other">Other</label>
-                            </div>
+                </div>
+                <div class="form-group">
+                    <label>Question Type</label>
+                    <div class="radio-group row-fluid text-center">
+                        <div class="col-4 p-0">
+                            <input class="radio" type="radio" id="edit-question-form-type-help" name="type" value="Help">
+                            <label for="edit-question-form-type-help">Help</label>
+                        </div>
+                        <div class="col-4 p-0">
+                            <input class="radio" type="radio" id="edit-question-form-type-question" name="type" value="Question">
+                            <label for="edit-question-form-type-question">Question</label>
+                        </div>
+                        <div class="col-4 p-0">
+                            <input class="radio" type="radio" id="edit-question-form-type-other" name="type" value="Other">
+                            <label for="edit-question-form-type-other">Other</label>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="edit-question-form-dob">Date of Birth</label>
-                        <input id="edit-question-form-dob" class="form-control" name="dob" placeholder="Select date" type="text" autocomplete="off">
-                    </div> 
+                </div>
+                <div class="form-group">
+                    <label for="edit-question-form-description">Description</label>
+                    <textarea class="form-control edit-question-form-description" name="description" id="comment-form-description" rows="6" maxlength="160" placeholder="Write your description here ..."></textarea>
                 </div>
 
                 <div class="modal-footer">
