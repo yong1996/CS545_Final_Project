@@ -57,6 +57,14 @@ router.get('/:id', async (req, res) => {
       let comments = await commentData.getCommentsByQuestion(questionId);
       let commentPagedData = helper.pagination(comments, 1, 3);
 
+      if(question.type == "help") {
+        question.h = true;
+      } else if (question.type == "question") {
+        question.q = true;
+      } else {
+        question.o = true;
+      }
+      
       data = {
         title: question.title, 
         question: question, 
