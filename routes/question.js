@@ -56,18 +56,22 @@ router.get('/:id', async (req, res) => {
 
       let comments = await commentData.getCommentsByQuestion(questionId);
       let commentPagedData = helper.pagination(comments, 1, 3);
-
-      if(question.type == "help") {
+      
+      if(question.type == "Help") {
         question.h = true;
-      } else if (question.type == "question") {
+      } else if (question.type == "Question") {
         question.q = true;
       } else {
         question.o = true;
       }
+      question.petType = middleware.petType;
+      console.log("question.petType", question.petType);
+      console.log("question.pet", question.pet);
+      
       
       data = {
-        title: question.title, 
-        question: question, 
+        title: question.title,
+        question: question,
         photos: photoPagedData.photos,
         isPhotoLastPage: photoPagedData.isLastPage,
         comments : commentPagedData.data,

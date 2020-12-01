@@ -8,6 +8,7 @@ const middleware = require('./middleware');
 router.get('/', middleware.loginRequired, async (req, res) => {
   try {
     let user = await usersData.getUser(req.session.userid);
+    user.petType = middleware.petType;
     data = {
       title: "Profile",
       username : req.session.username,

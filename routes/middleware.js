@@ -5,6 +5,8 @@ let sessionConfig = {
   saveUninitialized: true
 }
 
+const petType = ["Cat", "Dog", "Bird", "Fish", "Plant", "Other"];
+
 const loginRequired = (req, res, next) => {
   if (!req.session.userid) {
     res.redirect('/login');
@@ -31,6 +33,7 @@ const notLoginRequired = (req, res, next) => {
 
 module.exports = {
   sessionConfig,
+  petType,
   loginRequired,
   loginRequiredJson,
   notLoginRequired,

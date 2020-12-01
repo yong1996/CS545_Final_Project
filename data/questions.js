@@ -12,10 +12,6 @@ function firstLetterUpperCase(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function convertDateToString(date) {
-  return date.getFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
-}
-
 // ======================================================
 // Validate functions
 function validateId(id){
@@ -44,10 +40,8 @@ async function validateOwner(owner){
 // Body functions
 async function addQuestion(title, pet, type, description, owner){
   validateTitle(title);
-  await validateOwner(owner);
-
-  console.log(title, pet, type, description, owner);
-  
+  title = firstLetterUpperCase(title);
+  await validateOwner(owner);  
 
   let question = {
     title: title,
@@ -77,10 +71,11 @@ async function addQuestion(title, pet, type, description, owner){
 async function updateQuestion(id, question){
   validateId(id);
   validateTitle(question.title);
+  let title = firstLetterUpperCase(question.title);
   validateDescription(question.description);
 
   let updateQuestion = {
-    title: question.title,
+    title: title,
     pet: question.pet,
     type: question.type,
     description: description,
@@ -159,24 +154,8 @@ async function getQuestion(id){
   if (!owner) throw "owner not found";
 
   question.owner = owner.username;
-  // question.age = calculateAge(question.dob);
-  // question.dob = convertDateToString(question.dob);
 
   if (question.avatar) question.avatar = await imgData.getPhotoDataId(question.avatar);
-
-  // if(question.heightWeight && question.heightWeight.length) {
-  //   question.weightList = [], question.bmiList = [], question.healthDateList = [];
-  //   question.weight = question.heightWeight[question.heightWeight.length - 1].weight;
-  //   question.height = question.heightWeight[question.heightWeight.length - 1].height;
-  //   question.bmi = Math.round(question.weight / question.height * 100) / 100;
-  //   question.lastHeightWeightUpdate = convertDateToString(question.heightWeight[0].date);
-  //   for (let hw of question.heightWeight) {
-  //     question.weightList.push(hw.weight);
-  //     question.bmiList.push(Math.round(hw.weight / hw.height * 100) / 100);
-  //     question.healthDateList.push(convertDateToString(hw.date));
-  //   }
-  // }
-  // question.healthCondition = getQuestionHealthCondition(question.type, question.age, question.weight, question.gender)
 
   return question;
 }
