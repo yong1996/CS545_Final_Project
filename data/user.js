@@ -130,6 +130,27 @@ async function changePassword(id, newPassword){
   return await getUser(id);
 }
 
+async function changeZip(id, newZip){
+  validateId(id);  
+  validatezip(newZip);
+  
+  const parsedId = ObjectId.createFromHexString(id);
+  const usersCollection = await users();
+
+  const updateUserZip = {
+      zip: newZip
+    };
+  const originalData = await usersCollection.findOne({ _id: parsedId });
+
+  const updateInfo = await usersCollection.updateOne({ _id: parsedId }, { $set: updateUserZip});
+
+  if (updateInfo.modifiedCount === 0) {
+      throw "Could not update user zip successfully";
+    }
+
+  return await getUser(id);
+}
+
 async function updateAvatar(id, file){
   validateId(id);
 
@@ -167,6 +188,7 @@ module.exports = {
     getUser,
     updateAvatar,
     changePassword,
+    changeZip,
     comparePassword,
     getUserByUsername,
   }

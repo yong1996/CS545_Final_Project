@@ -54,6 +54,16 @@ router.post('/password', middleware.loginRequiredJson, async (req, res) => {
   }
 });
 
+router.post('/zip', middleware.loginRequiredJson, async (req, res) => {
+  try {
+    await usersData.changeZip(req.session.userid, req.body.zip);
+    res.json({status: "success"});
+  } catch (e) {
+    res.status(500);
+    res.json({status: "error", errorMessage: e});
+  }
+});
+
 router.post('/avatar', middleware.loginRequiredJson, upload.single('avatar'), async (req, res) => {
   try {
     let user = await usersData.updateAvatar(req.session.userid, req.file);
