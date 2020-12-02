@@ -10,7 +10,7 @@
                 {{#if question.avatar}}
                 <img src="{{ question.avatar }}" class="img-fluid avatar" alt="question avatar">                
                 {{else}}
-                <img src="/public/img/avatar/default-dog.png" class="img-fluid avatar" alt="question avatar">
+                <img src="/public/img/avatar/default-question.png" class="img-fluid avatar" alt="question avatar">
                 {{/if}}
                 </div>
             </div>
@@ -23,11 +23,14 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <h2><span id="question-type">{{ question.type }}</span> :</h2>
-                <p><span id="question-description">{{ question.description }}</span></p>
-            </div>
         </div>
+    </div>
+</section>
+
+<section class="m-4">
+    <div class="container">
+                <h2><span id="question-type">{{ question.type }}</span></h2>
+                <p><span id="question-description">{{ question.description }}</span></p>
     </div>
 </section>
 
