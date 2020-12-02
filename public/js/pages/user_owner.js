@@ -76,7 +76,7 @@ $(function() {
         let card = $('<div class="card">');
         let a = $('<a href="/question/' + id + '">');
         let avatarContainer = $('<div class="avatar-container">')
-        let img = $('<img src="/public/img/avatar/default-dog.png" class="card-img-top" alt="question avatar">');
+        let img = $('<img src="/public/img/avatar/default-question.png" class="card-img-top" alt="question avatar">');
         if (avatar) {
             img = $('<img src="' + avatar + '" class="card-img-top" alt="question avatar">');
         }
