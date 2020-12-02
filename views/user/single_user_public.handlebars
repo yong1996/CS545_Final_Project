@@ -7,7 +7,8 @@
                 </div>
             </div>
             <div class="col-8 col-lg-10 user-description">
-                <h1>{{user.username}}</h1>
+                <h1>Username: {{user.username}}</h1>
+                <h2>Zip: {{user.zip}}</h2>
                 {{#if user.questions}}
                 <p>This user posted {{user.questions.length}} {{#greaterThan user.questions.length 1}}post{{else}}question{{/greaterThan}}</p>                
                 {{else}}
@@ -36,7 +37,7 @@
                         </div>
                         <div class="card-body">
                             <h2 class="card-title display-4 mb-0">{{title}}</h2>
-                            <p class="card-text"><span class="card-text-gender">{{gender}}</span> {{type}}</p>
+                            <p class="card-text"><span class="card-text-pet">{{type}}</span>{{pet}}</p>
                         </div>
                     </a>
                 </div>

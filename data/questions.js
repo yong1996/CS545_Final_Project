@@ -14,7 +14,7 @@ function firstLetterUpperCase(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-async function checkType(Type){
+function checkType(Type){
   if(Type == "Help") return Type
   else if(Type == "help") return "Help"
   else if(Type == "Question") return Type

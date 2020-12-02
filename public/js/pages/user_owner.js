@@ -177,4 +177,43 @@ $(function() {
             }
         });
     });
+
+    $('#change-zip-form').submit(function(event){
+        event.preventDefault();
+        if ($("#change-zip-form-new-zip").val().length < 5) {
+            error("length of zip is less than 5");
+            return;
+        }
+        if ($("#change-zip-form-new-zip").val().length > 10) {
+            error("length of zip is larger than 10");
+            return;
+        }
+        $.ajax({
+            method: "POST",
+            url: "/user/zip",
+            contentType: "application/json",
+            data: JSON.stringify({
+                zip: $("#change-zip-form-new-zip").val()
+            }),
+            success: function(data){
+                if (data.redirect) {
+                    window.location.href = data.redirect;
+                    return;
+                }
+                if (data.status == "success") {
+                    $('#change-zip-modal').modal('hide'); 
+                    success("zip is changed");
+                } else {
+                    error(data.errorMessage);
+                }
+            },
+            error: function(data){
+                if (data.responseJSON) {
+                    error(data.responseJSON.errorMessage);
+                } else {
+                    error("fail connecting to server");
+                }
+            }
+        });
+    });
 });

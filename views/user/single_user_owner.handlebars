@@ -7,7 +7,8 @@
                 </div>
             </div>
             <div class="col-9">
-                <h1>{{user.username}}</h1>
+                <h1>Username: {{user.username}}</h1>
+                <h2>Zip: {{user.zip}}</h2>
                 <div>
                     <button class="btn btn-secondary my-3" data-toggle="modal" data-target="#update-avatar-modal">Change avatar</button>
                     <button class="btn btn-secondary my-3" data-toggle="modal" data-target="#change-password-modal">Change password</button>
@@ -109,6 +110,31 @@
     </div>
 </div>
 
+<div class="modal fade" id="change-zip-modal" tabindex="-1" role="dialog" aria-labelledby="modal-title-change-zip" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title-change-zip">Change zipcode</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form id="change-zip-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="change-zip-form-new-zip">New zipcode</label>
+                        <input type="zip" id="change-zip-form-new-zip" class="form-control" placeholder="New ZipCode" name="new-zip">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Change zipcode</button>
+                        <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+         </div>
+    </div>
+</div>
+
 {{!-- change password --}}
 <div class="modal fade" id="change-password-modal" tabindex="-1" role="dialog" aria-labelledby="modal-title-change-password" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -131,7 +157,7 @@
                         <input type="password" id="change-password-form-new-password" class="form-control" placeholder="new password" name="new-passowrd" data-toggle="tooltip" data-placement="top" title="length must be greatter than or equal to 8">
                     </div>
                     <div class="form-group">
-                        <label for="change-password-form-confirm-new-password">Condirm new password</label>
+                        <label for="change-password-form-confirm-new-password">Confirm new password</label>
                         <input type="password" id="change-password-form-confirm-new-password" class="form-control" placeholder="new password" name="confirm-new-passowrd" data-toggle="tooltip" data-placement="top" title="must be same as the password you inputted">
                     </div>
                 </div>
@@ -164,7 +190,7 @@
                         </div>
                         <div class="card-body">
                             <h2 class="card-title display-4 mb-0">{{title}}</h2>
-                            <p class="card-text"><span class="card-text-pet">{{pet}}</span> {{type}}</p>
+                            <p class="card-text"><span class="card-text-pet">{{type}}: </span>{{pet}}</p>
                         </div>
                     </a>
                 </div>
