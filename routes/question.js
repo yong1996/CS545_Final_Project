@@ -10,7 +10,7 @@ const xss = require("xss");
 
 const checkType = (type) =>{
   if(type == "Help") return "Help";
-  if(type == "help") return "Help";
+  else if(type == "help") return "Help";
   else if(type == "Question") return "Question";
   else if(type == "question") return "Question";
   else return "Other";

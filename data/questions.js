@@ -14,12 +14,12 @@ function firstLetterUpperCase(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-async function checkType(Type){
-  if(Type == "Help") return Type
-  else if(Type == "help") return "Help"
-  else if(Type == "Question") return Type
-  else if(Type == "question") return "Question"
-  else return "Other"
+function checkType(type){
+  if(type == "Help") return "Help";
+  else if(type == "help") return "Help";
+  else if(type == "Question") return "Question";
+  else if(type == "question") return "Question";
+  else return "Other";
 }
 
 // ======================================================
@@ -56,7 +56,7 @@ async function addQuestion(title, pet, type, description, owner, zip){
   validateTitle(title);
   title = firstLetterUpperCase(title);
   pet = firstLetterUpperCase(pet);
-  type = checkType(type);
+  type = checkType(type);  
   await validateOwner(owner);  
   validatePet(pet);
 
