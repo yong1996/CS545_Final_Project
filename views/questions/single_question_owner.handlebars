@@ -25,14 +25,14 @@
                     <div>
                         <h2>Publisher: <span id="question-owner"><a href="/user/{{ question.owner }}">{{ question.owner }}</a></span></h2>
                         <h2>Pet: <span id="question-pet">{{ question.pet }}</span></h2>
-                        <h2>Type: <span id="question-type">{{ question.type }}</span></h2>
                     </div>
 
                 </div>
                 <button id="edit-question-profile-button" class="btn btn-primary my-3" data-toggle="modal" data-target="#edit-question-profile-modal">Edit</button>
             </div>
             <div class="container">
-                <h1>{{ question.type }}: <span id="question-description">{{ question.description }}</span></h1>
+                <h2><span id="question-type">{{ question.type }}</span> :</h2>
+                <p><span id="question-description">{{ question.description }}</span></p>
             </div>
         </div>
     </div>
@@ -83,12 +83,11 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="edit-question-form-title">Title</label>
-                        <input type="text" id="edit-question-form-title" class="form-control" placeholder="title" name="title" value={{question.title}}>
+                        <input type="text" id="edit-question-form-title" class="form-control" placeholder="title" name="title">
                     </div>
                     <div class="form-group">
                         <label for="edit-question-form-pet">Pet Type</label>
-                        <select id="edit-question-form-pet" class="custom-select form-control" name="pet" value = {{question.pet}}>
-                            <option value="{{question.pet}}">{{question.pet}}</option>
+                        <select id="edit-question-form-pet" class="custom-select form-control" name="pet">
                             {{#each question.petType}}
                             <option value="{{this}}">{{this}}</option>
                             {{/each}}
@@ -99,22 +98,22 @@
                     <label>Question Type</label>
                     <div class="radio-group row-fluid text-center">
                         <div class="col-4 p-0">
-                            <input class="radio" type="radio" id="edit-question-form-type-help" name="type" value="Help" {{#if question.h}} checked {{/if}}>
+                            <input class="radio" type="radio" id="edit-question-form-type-help" name="type" value="Help">
                             <label for="edit-question-form-type-help">Help</label>
                         </div>
                         <div class="col-4 p-0">
-                            <input class="radio" type="radio" id="edit-question-form-type-question" name="type" value="Question" {{#if question.q}} checked {{/if}}>
+                            <input class="radio" type="radio" id="edit-question-form-type-question" name="type" value="Question">
                             <label for="edit-question-form-type-question">Question</label>
                         </div>
                         <div class="col-4 p-0">
-                            <input class="radio" type="radio" id="edit-question-form-type-other" name="type" value="Other" {{#if question.o}} checked {{/if}}>
+                            <input class="radio" type="radio" id="edit-question-form-type-other" name="type" value="Other">
                             <label for="edit-question-form-type-other">Other</label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="edit-question-form-description">Description</label>
-                    <textarea class="form-control edit-question-form-description" name="description" id="comment-form-description" rows="6" maxlength="160" placeholder="Write your description here ...">{{question.description}}</textarea>
+                    <textarea class="form-control edit-question-form-description" name="description" id="edit-question-form-description" rows="6" maxlength="160" placeholder="Write your description here ...">{{question.description}}</textarea>
                 </div>
 
                 <div class="modal-footer">

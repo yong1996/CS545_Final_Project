@@ -17,8 +17,6 @@
             <div class="col-9">
                 <div class="question-info-container">
                     <h2>Title: <span id="question-title">{{ question.title }}</span></h2>
-                    {{!-- <h2>Type</h2>
-                    <p id="question-type">{{ question.type }}</p> --}}
                     <div>
                         <h2>Publisher: <span id="question-owner"><a href="/user/{{ question.owner }}">{{ question.owner }}</a></span></h2>
                         <h2>Pet: <span id="question-pet">{{ question.pet }}</span></h2>
@@ -26,7 +24,8 @@
                 </div>
             </div>
             <div class="container">
-                <h1>{{ question.type }}: <span id="question-description">{{ question.description }}</span></h1>
+                <h2><span id="question-type">{{ question.type }}</span> :</h2>
+                <p><span id="question-description">{{ question.description }}</span></p>
             </div>
         </div>
     </div>

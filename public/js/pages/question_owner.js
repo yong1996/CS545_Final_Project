@@ -55,9 +55,10 @@ $(function() {
     });    
 
     $("#edit-question-profile-button").click(function() {
-        $("#edit-question-form-name").val($("#question-name").text());
-        $("#edit-question-form-type").val($("#question-type").text());
-        $("input[name=gender][value=" + $("#question-gender").text() + "]").prop('checked', true);
+        $("#edit-question-form-title").val($("#question-title").text());
+        $("#edit-question-form-pet").val($("#question-pet").text());
+        $("input[name=type][value=" + $("#question-type").text() + "]").prop('checked', true);
+        $("#edit-question-form-description").val().text();
     });
   
     $("#edit-question-form").submit(function(event) {
@@ -80,7 +81,7 @@ $(function() {
                 }
                 if (data.status == "success") {
                     $('#edit-question-profile-modal').modal('hide'); 
-                    $("#question-title").text(data.question.title);
+                    location.reload();
                     success("question is updated");
                 } else {
                     error(data.errorMessage);

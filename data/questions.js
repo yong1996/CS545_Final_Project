@@ -5,6 +5,8 @@ const users = mongoCollections.users;
 const imgData = require("./img");
 const commentData = require("./comments");
 const ObjectId = require('mongodb').ObjectID;
+const middleware = require('../routes/middleware');
+const xss = require("xss");
 
 // ======================================================
 // Helper functions
@@ -26,6 +28,10 @@ function validateTitle(title){
   if (title.length > 30) throw "length title is greater than 30";
 }
 
+function validatePet(pet){
+  if(!middleware.petType.includes(pet)) throw "pet type is undefinded";
+}
+
 async function validateOwner(owner){
   if (!owner) throw "owner is undefinded";
   if (owner.constructor !== String) throw "owner is not a string";
@@ -42,6 +48,7 @@ async function addQuestion(title, pet, type, description, owner){
   validateTitle(title);
   title = firstLetterUpperCase(title);
   await validateOwner(owner);  
+  validatePet(pet);
 
   let question = {
     title: title,
@@ -62,8 +69,6 @@ async function addQuestion(title, pet, type, description, owner){
   const updateInfo = await usersCollection.updateOne({ _id: ObjectId.createFromHexString(owner) },
                                         {$push: {questions: { $each: [ ObjectId(questionId).toString() ], $position: 0}}});
   if (updateInfo.modifiedCount === 0) throw "could not add the question to the user";
-
-  console.log(await getQuestion(questionId.toString()));
   
   return await getQuestion(questionId.toString());
 }
@@ -71,14 +76,14 @@ async function addQuestion(title, pet, type, description, owner){
 async function updateQuestion(id, question){
   validateId(id);
   validateTitle(question.title);
-  let title = firstLetterUpperCase(question.title);
-  validateDescription(question.description);
+  validatePet(question.pet);
+  let title = firstLetterUpperCase(xss(question.title));
 
   let updateQuestion = {
     title: title,
     pet: question.pet,
     type: question.type,
-    description: description,
+    description: xss(question.description),
   }
 
   const questionsCollection = await questions();
