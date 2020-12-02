@@ -9,9 +9,9 @@
             <div class="col-8 col-lg-10 user-description">
                 <h1>{{user.username}}</h1>
                 {{#if user.questions}}
-                <p>This user has {{user.questions.length}} {{#greaterThan user.questions.length 1}}post{{else}}question{{/greaterThan}}</p>                
+                <p>This user posted {{user.questions.length}} {{#greaterThan user.questions.length 1}}post{{else}}question{{/greaterThan}}</p>                
                 {{else}}
-                <p>This user doesn't have question</p>
+                <p>This user haven't post any question</p>
                 {{/if}}
             </div>
         </div> 
@@ -31,7 +31,7 @@
                             {{#if avatar}}
                             <img src="{{ avatar }}" class="card-img-top" alt="question avatar">
                             {{else}}
-                            <img src="/public/img/avatar/default-dog.png" class="card-img-top" alt="question avatar">
+                            <img src="/public/img/avatar/default-question.png" class="card-img-top" alt="question avatar">
                             {{/if}}
                         </div>
                         <div class="card-body">

@@ -10,11 +10,11 @@
                     {{#if question.avatar}}
                     <img src="{{ question.avatar }}" id="question-avatar" class="img-fluid avatar" alt="question avatar">
                     {{else}}
-                    <img src="/public/img/avatar/default-dog.png" id="question-avatar" class="img-fluid rounded-circle avatar" alt="question avatar">
+                    <img src="/public/img/avatar/default-question.png" id="question-avatar" class="img-fluid rounded-circle avatar" alt="question avatar">
                     {{/if}}
                 </div>
                 <div class="text-center">
-                    <button data-toggle="modal" class="btn btn-secondary my-3" data-target="#update-avatar-modal">Change avatar</button>
+                    <button data-toggle="modal" class="btn btn-secondary my-3" data-target="#update-avatar-modal">Change Photo</button>
                 </div>
             </div>
             <div class="col-9">
@@ -31,11 +31,14 @@
                 </div>
                 <button id="edit-question-profile-button" class="btn btn-primary my-3" data-toggle="modal" data-target="#edit-question-profile-modal">Edit</button>
             </div>
-            <div class="container">
-                <h2><span id="question-type">{{ question.type }}</span> :</h2>
-                <p><span id="question-description">{{ question.description }}</span></p>
-            </div>
         </div>
+    </div>
+</section>
+
+<section class="m-4">
+    <div class="container">
+                <h2><span id="question-type">{{ question.type }}</span></h2>
+                <p><span id="question-description">{{ question.description }}</span></p>
     </div>
 </section>
 
