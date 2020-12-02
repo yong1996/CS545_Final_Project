@@ -1,6 +1,31 @@
 <section class="section">
   <div class="container">
     <h1 class="mb-5">All questions</h1>
+    <nav class="navbar navbar-light bg-light justify-content-between">
+      <a class="navbar-brand">Search: </a>
+      <form id="search-form" class="form-inline">
+          <select id="search-pet" class="custom-select form-control" name="pet">
+            <option value="none" selected> Choose Pet </option>
+            {{#each petType}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+          </select>
+
+          <select id="search-type" class="form-control mr-sm-2" name="type">
+            <option value="none" selected> Choose Type </option>
+            <option value="Help">Help</option>
+            <option value="Question">Question</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <input class="form-control mr-sm-2" id="search-zip" type="zip" placeholder="zip" aria-label="zip" name="type" value="">
+          <input class="form-control mr-sm-2" id="search-title" type="title" placeholder="title" aria-label="title" name="title" value="">
+          <input class="form-control mr-sm-2" id="search-user" type="user" placeholder="user" aria-label="user" name="user" value="">
+        <button type="submit" class="btn btn-primary">Search</button>
+        {{!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> --}}
+      </form>
+    </nav>
+
     <div class="row">
       {{#each questions}}
       <div class="col-lg-3 col-md-4 col-6 mb-4">
@@ -15,13 +40,14 @@
                 </div>
                 <div class="card-body">
                     <h2 class="display-4">{{title}}</h2>
+                    <p class="card-text"><span class="card-text-pet">{{pet}}</span> {{type}}</p>
                 </div>
               </a>
           </div>
       </div>    
       {{/each}}
     </div>
-    {{!-- {{#pagination totalPage currentPage}}
+    {{#pagination totalPage currentPage}}
     <nav>
       <ul class="pagination justify-content-center">
         {{#if @previousPage}}
@@ -47,7 +73,12 @@
         {{/if}}
       </ul>
     </nav>
-    {{/pagination}} --}}
+    {{/pagination}}
   </div>
 </section>
 
+<script>
+ if(!document.getElementById('zip').value.match(/^[0-9]*$/)) error("zip should contain only number")
+
+
+</script>

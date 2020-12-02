@@ -8,17 +8,28 @@ const middleware = require('./middleware');
 const helper = require('./helper');
 const xss = require("xss");
 
+const checkType = (type) =>{
+  if(type == "Help") return "Help";
+  if(type == "help") return "Help";
+  else if(type == "Question") return "Question";
+  else if(type == "question") return "Question";
+  else return "Other";
+}
+
 router.get('/', async (req, res) => {
     try{
       let questions = await questionData.getAllQuestions();
 
       let pageData = helper.pagination(questions, req.query.page, 12);
+      console.log(pageData);
+      
       data = {
         title: "All Questions",
-        questions : questions,
+        questions: pageData.data,
         totalPage: pageData.totalPage,
         currentPage: pageData.currentPage,
-        username : req.session.username
+        username: req.session.username,
+        petType: middleware.petType,
       };
       res.render('questions/questions', data);
     } catch (e) {
@@ -32,10 +43,11 @@ router.post('/', middleware.loginRequiredJson, async (req, res) => {
       let title = xss(req.body.title);
       let description = xss(req.body.description);
       let pet = req.body.pet;
-      let type = req.body.type;
+      let type = checkType(req.body.type);
       let owner = req.session.userid;
+      let zip = req.session.zip;
 
-      let question = await questionData.addQuestion(title, pet, type, description, owner);
+      let question = await questionData.addQuestion(title, pet, type, description, owner, zip);
       res.json({ status: "success", question: question });
     } catch (e) {
       res.status(400);
@@ -101,7 +113,7 @@ router.put('/:id', middleware.loginRequiredJson, async (req, res) => {
       question.title = xss(question.title);
       question.description = xss(question.description);
       question.pet = question.pet;
-      question.type = question.type;
+      question.type = checkType(question.type);
 
       await questionData.checkOwner(req.session.userid, questionId);
       question = await questionData.updateQuestion(questionId, question);

@@ -11,7 +11,7 @@ router.get('/signup', middleware.notLoginRequired, async (req, res) => {
 router.post('/signup', middleware.notLoginRequired, async (req, res) => {
   try {
     let username = xss(req.body.username);
-    await usersData.addUser(username, req.body.password);
+    await usersData.addUser(username, req.body.zip, req.body.password);
     res.redirect('/login');
   } catch (e) {
     res.status(401).render('account/signup', {title: "Signup", error: e, hideFooter: true});
@@ -33,6 +33,7 @@ router.post('/login', middleware.notLoginRequired, async (req, res) => {
 
     const compareResult = await usersData.comparePassword(username, req.body.password);
     req.session.userid = compareResult.userid;
+    req.session.zip = compareResult.zip;
     req.session.username = compareResult.username;
 
     return res.redirect('/user');  

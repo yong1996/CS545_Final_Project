@@ -24,6 +24,12 @@ function validateUsername(username){
   if (!username.match(letterNumber)) throw "username should contain only letter and number";
 }
 
+function validatezip(zip){
+  if (!zip) throw "zip is undefinded";
+  let zipNumber = /^[0-9]+$/;
+  if (!zip.match(zipNumber)) throw "zip should contain only number";
+}
+
 function validatePassword(password){
   if (!password) throw "password is undefinded";
   if (password.constructor !== String) throw "password is not of the proper type";
@@ -32,8 +38,9 @@ function validatePassword(password){
 }
 
 //========================================
-async function addUser(username, password){
+async function addUser(username, zip, password){
   validateUsername(username);
+  validatezip(zip);
   validatePassword(password);
 
   const usersCollection = await users();
@@ -45,6 +52,7 @@ async function addUser(username, password){
   let user = {
       username: username.toLowerCase(),
       password: bcryptjsPassword,
+      zip: zip,
       avatar: null,
       questions: []}
 
@@ -151,7 +159,7 @@ async function comparePassword(username, password) {
   const isCorrect = await bcryptjs.compare(password, userInfo.password);
   if (!isCorrect) throw 'invalid username/password';
 
-  return {userid: userInfo._id, username: userInfo.username};
+  return {userid: userInfo._id, username: userInfo.username, zip: userInfo.zip};
 }
 
 module.exports = {

@@ -206,7 +206,8 @@ input[type=radio] {
 p.card-text {
     font-size: 15px;
     margin: 0px;
-    color: #475dda;
+    /* color: #475dda; */
+    color: black;
     font-weight: 400;
 }
 
