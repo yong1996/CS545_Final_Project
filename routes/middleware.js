@@ -5,7 +5,7 @@ let sessionConfig = {
   saveUninitialized: true
 }
 
-const petType = ["Cat", "Dog", "Bird", "Fish", "Plant", "Other"];
+const petType = ["Dog", "Cat", "Bird", "Fish", "Rodent", "Reptiles", "Horse", "Amphibian", "Insect", "Other"];
 
 const loginRequired = (req, res, next) => {
   if (!req.session.userid) {

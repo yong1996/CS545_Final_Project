@@ -231,7 +231,6 @@ async function getPopularQuestions() {
 
   for(let question of allQuestions) {
     if (question.avatar) question.avatar = await imgData.getPhotoDataId(question.avatar);
-    question.age = calculateAge(question.dob);
   }
 
   return allQuestions;

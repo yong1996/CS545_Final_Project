@@ -15,11 +15,11 @@ const constructorMethod = (app) => {
 
   app.get('/', async (req, res) => {
     try {
-      // let popularQuestions = await questionData.getPopularQuestions();
+        let popularQuestions = await questionData.getPopularQuestions();
       data = {
         title: "Home",
         username : req.session.username,
-        // popularQuestions: popularQuestions
+        popularQuestions: popularQuestions
       };
       res.render('home', data);
     } catch (e) {
