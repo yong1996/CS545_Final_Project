@@ -5,14 +5,14 @@
       <a class="navbar-brand">Search: </a>
       <form id="search-form" class="form-inline">
           <select id="search-pet" class="custom-select form-control" name="pet">
-            <option value="none" selected> Choose Pet </option>
+            <option value="none"> Choose Pet </option>
             {{#each petType}}
             <option value="{{this}}">{{this}}</option>
             {{/each}}
           </select>
 
-          <select id="search-type" class="form-control mr-sm-2" name="type">
-            <option value="none" selected> Choose Type </option>
+          <select id="search-type" class="custom-select form-control" name="qtype">
+            <option value="none"> Choose Type </option>
             <option value="Help">Help</option>
             <option value="Question">Question</option>
             <option value="Other">Other</option>

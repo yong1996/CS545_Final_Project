@@ -18,10 +18,22 @@ const checkType = (type) =>{
 
 router.get('/', async (req, res) => {
     try{
-      let questions = await questionData.getAllQuestions();
+      var array = {}
+      if(req.url != "/") {
+        let search = req.url;
+        let p = search.split("?")[1];
+        let a = p.split("&");
+        for(let i in a){
+            let s = a[i].split("=");
+            if(s[1] != "" && s[1] != "none") {
+              array[s[0]] = s[1];
+            }
+        }
+      }
+      
+      let questions = await questionData.getAllQuestions(array);
 
       let pageData = helper.pagination(questions, req.query.page, 12);
-      console.log(pageData);
       
       data = {
         title: "All Questions",

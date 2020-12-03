@@ -147,9 +147,9 @@ async function removeQuestion(id){
   return removedData;
 }
 
-async function getAllQuestions(){
+async function getAllQuestions(array){
   const questionsCollection = await questions();
-  const allQuestions = await questionsCollection.find().sort({ $natural: -1 }).toArray();
+  const allQuestions = await questionsCollection.find(array).sort({ $natural: -1 }).toArray();
   if (!allQuestions) throw 'no question found';
 
   for(let question of allQuestions) {
