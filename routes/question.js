@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const questionData = require("../data/questions");
+const usersData = require("../data/user");
 const commentData = require("../data/comments");
 const multer  = require("multer");
 const upload = multer({dest:"./public/img/upload"});
@@ -26,7 +27,20 @@ router.get('/', async (req, res) => {
         for(let i in a){
             let s = a[i].split("=");
             if(s[1] != "" && s[1] != "none") {
-              array[s[0]] = s[1];
+              if (s[0] == "owner") {
+                  let ownerId = await usersData.getUserByUsernameToId(s[1])
+                  array["owner"] = ownerId;
+              } else if(s[0] == "title") {
+                let str = xss(s[1])
+                let Uf = str.charAt(0).toUpperCase()
+                let f = str.charAt(0)
+                let l = str.slice(1);
+
+                let re = new RegExp(`.*[${Uf}${f}]${l}.*`);
+                array[s[0]] = re;
+              }else {
+                array[s[0]] = xss(s[1]);
+              }
             }
         }
       }

@@ -16,6 +16,6 @@ $(function() {
         $("input[name=search-type][value=" + array["qtype"] + "]").prop('checked', true);
         $("#search-zip").val(array["zip"]);
         $("#search-title").val(array["title"]);
-        $("#search-user").val(array["user"]);
+        $("#search-owner").val(array["owner"]);
     }
 });

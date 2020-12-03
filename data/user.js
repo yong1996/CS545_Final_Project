@@ -84,6 +84,15 @@ async function getUser(id){
   return userInfo;
 }
 
+async function getUserByUsernameToId(username){
+  validateUsername(username);
+
+  const usersCollection = await users();
+  const userInfo = await usersCollection.findOne({ username: username });
+  if (userInfo == null) return username;
+  return userInfo._id.toString();
+}
+
 async function getUserByUsername(username){
   validateUsername(username);
 
@@ -191,5 +200,6 @@ module.exports = {
     changeZip,
     comparePassword,
     getUserByUsername,
+    getUserByUsernameToId,
   }
   

@@ -112,11 +112,11 @@ const main = async () => {
         let t = "cat "+i;
         questionn = await questionData.addQuestion(
             t,
-            "Cat",
-            "Help",
+            "Dog",
+            "Question",
             "22",
-            userId1,
-            user1.zip,
+            userId2,
+            user2.zip,
         );
         console.log(i+" question created");
     }
