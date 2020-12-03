@@ -38,7 +38,9 @@ router.get('/', async (req, res) => {
 
                 let re = new RegExp(`.*[${Uf}${f}]${l}.*`);
                 array[s[0]] = re;
-              }else {
+              } else if(s[0] == "qtype") {
+                array["type"] = s[1];
+              } else {
                 array[s[0]] = xss(s[1]);
               }
             }
