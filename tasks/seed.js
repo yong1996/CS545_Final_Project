@@ -86,11 +86,12 @@ const main = async () => {
 
     // =================================
     question1 = await questionData.addQuestion(
-        "11",
-        "Cat",
+        "How to make dog be cute?",
+        "Dog",
         "help",
-        "22",
-        userId1
+        "Just be cute",
+        userId1,
+        '07307'
     );
     user1question1 = question1._id.toString();
     await uploadQuestionAvatar(user1question1, 'public/img/question/dog.jpg');
@@ -101,25 +102,25 @@ const main = async () => {
     console.log("a's 11 photos added");
 
     // =================================    
-    for (let i = 0; i < 8; i++) {        
+    for (let i = 0; i < 4; i++) {        
         comment = await commentsData.addComment("You are so lovely", userId2, user1question1, user1.zip);
     }
     console.log("question1's comment created");
 
 
 
-    for(let i= 0; i<30; i++){
-        let t = "cat "+i;
-        questionn = await questionData.addQuestion(
-            t,
-            "Dog",
-            "Question",
-            "22",
-            userId2,
-            user2.zip,
-        );
-        console.log(i+" question created");
-    }
+    // for(let i= 0; i<30; i++){
+    //     let t = "cat "+i;
+    //     questionn = await questionData.addQuestion(
+    //         t,
+    //         "Dog",
+    //         "Question",
+    //         "22",
+    //         userId2,
+    //         user2.zip,
+    //     );
+    //     console.log(i+" question created");
+    // }
     // =================================
     await db.serverConfig.close();
 }
