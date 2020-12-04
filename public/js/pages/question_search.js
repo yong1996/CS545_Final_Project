@@ -51,14 +51,15 @@ $(function() {
                     break;
                 }
             }
-            for(let i in pl){
+            for(let i = 0; i<pl.length; i++){
+                let j = i+1;
                 if(array["page"]){
                     let s = search.split("page")[0];
                     let spl = s + pl[i];
-                    $("#page-link-"+i).attr("href", spl)
+                    $("#page-link-"+j).attr("href", spl);
                 } else {
                     let spl = search + "&" + pl[i];
-                    $("#page-link-"+i).attr("href", spl)
+                    $("#page-link-"+j).attr("href", spl);
                 }
             }
         }

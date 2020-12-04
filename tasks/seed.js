@@ -109,18 +109,18 @@ const main = async () => {
 
 
 
-    // for(let i= 0; i<30; i++){
-    //     let t = "cat "+i;
-    //     questionn = await questionData.addQuestion(
-    //         t,
-    //         "Dog",
-    //         "Question",
-    //         "22",
-    //         userId2,
-    //         user2.zip,
-    //     );
-    //     console.log(i+" question created");
-    // }
+    for(let i= 0; i<30; i++){
+        let t = "cat "+i;
+        questionn = await questionData.addQuestion(
+            t,
+            "Dog",
+            "Question",
+            "22",
+            userId2,
+            user2.zip,
+        );
+        console.log(i+" question created");
+    }
     // =================================
     await db.serverConfig.close();
 }
