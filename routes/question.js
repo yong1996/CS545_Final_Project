@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
         let a = p.split("&");
         for(let i in a){
             let s = a[i].split("=");
-            if(s[1] != "" && s[1] != "none") {
+            if(s[1] != "" && s[1] != "none" && s[0] != "page") {
               if (s[0] == "owner") {
                   let ownerId = await usersData.getUserByUsernameToId(s[1])
                   array["owner"] = ownerId;
@@ -38,8 +38,6 @@ router.get('/', async (req, res) => {
 
                 let re = new RegExp(`.*[${Uf}${f}]${l}.*`);
                 array[s[0]] = re;
-              } else if(s[0] == "qtype") {
-                array["type"] = s[1];
               } else {
                 array[s[0]] = xss(s[1]);
               }
