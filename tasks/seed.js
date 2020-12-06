@@ -112,11 +112,49 @@ const main = async () => {
         '07307'
     );
     user1question2 = question2._id.toString();
-    await uploadQuestionAvatar(user1question2, 'public/img/question/dog.jpg');
+    await uploadQuestionAvatar(user1question2, 'public/img/question/dog3.jpg');
+    console.log("a's question2 created");
+
+    await uploadQuestionPhoto(user1question2, 'public/img/question/dog4.jpg');
+    await uploadQuestionPhoto(user1question2, 'public/img/question/dog5.jpg');
+    console.log("a's 11 photos added");
+
+    // ------------------------------------------
+
+
+    question3 = await questionData.addQuestion(
+        "How to make my dog healthy?",
+        "Dog",
+        "help",
+        "I want to know how to prevent my dog from getting sick",
+        userId1,
+        '07307'
+    );
+    user1question3 = question3._id.toString();
+    await uploadQuestionAvatar(user1question3, 'public/img/question/dog6.jpg');
+    console.log("a's question3 created");
+
+    await uploadQuestionPhoto(user1question3, 'public/img/question/dog7.jpg');
+    await uploadQuestionPhoto(user1question3, 'public/img/question/dog8.jpg');
+    console.log("a's 11 photos added");
+
+    // ------------------------------------------
+
+
+    question4 = await questionData.addQuestion(
+        "Best place to walk my dog",
+        "Dog",
+        "help",
+        "I want to know where is the best place to walk my dog",
+        userId2,
+        '07307'
+    );
+    user2question1 = question4._id.toString();
+    await uploadQuestionAvatar(user2question2, 'public/img/question/dog9.jpg');
     console.log("b's question1 created");
 
-    await uploadQuestionPhoto(user1question2, 'public/img/question/dog1.jpg');
-    await uploadQuestionPhoto(user1question2, 'public/img/question/dog2.jpg');
+    await uploadQuestionPhoto(user2question1, 'public/img/question/dog10.jpg');
+    await uploadQuestionPhoto(user2question1, 'public/img/question/dog11.jpg');
     console.log("b's 11 photos added");
 
     // ------------------------------------------
