@@ -17,7 +17,7 @@ npm start
 
 ## Tech used
 - Database: MongoDB
-- Communication: GitHub, WeChat, Zoom
+- Communication: GitHub, Google Drive, WeChat, Zoom
 - Frontend: Argon based on Bootstrap 4
 - Plugin: jQuery, bootstrap-datepicker, Pooper, Fontawesome
 - Node packages: Handlebars, mongodb, express-session, base64-img, bcryptjs, xss, Multer, Gridfs
