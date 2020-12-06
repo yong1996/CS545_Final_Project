@@ -150,7 +150,7 @@ const main = async () => {
         '07307'
     );
     user2question1 = question4._id.toString();
-    await uploadQuestionAvatar(user2question2, 'public/img/question/dog9.jpg');
+    await uploadQuestionAvatar(user2question1, 'public/img/question/dog9.jpg');
     console.log("b's question1 created");
 
     await uploadQuestionPhoto(user2question1, 'public/img/question/dog10.jpg');
