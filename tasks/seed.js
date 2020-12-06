@@ -60,9 +60,9 @@ const main = async () => {
     const db = await dbConnection();
     await db.dropDatabase();
     // =================================
-    let originPassword1 = "a";
+    let originPassword1 = "aaaaaaaa";
     let user1 = {
-        username: 'a',
+        username: 'aaaaaa',
         password:originPassword1,
         zip: '07307',
         avatarId: null
@@ -72,9 +72,9 @@ const main = async () => {
     let userId1 = userOne._id.toString();
     await uploadUserAvatar(userId1, 'public/img/avatar/demo/user1.jpg');
 
-    let originPassword2 = "b";
+    let originPassword2 = "bbbbbbbb";
     let user2 = {
-        username: 'b',
+        username: 'bbbbbb',
         password:originPassword2,
         zip: '07307',
         avatarId: null
@@ -111,12 +111,12 @@ const main = async () => {
         userId1,
         '07307'
     );
-    user1question1 = question1._id.toString();
-    await uploadQuestionAvatar(user1question1, 'public/img/question/dog.jpg');
+    user1question2 = question2._id.toString();
+    await uploadQuestionAvatar(user1question2, 'public/img/question/dog.jpg');
     console.log("b's question1 created");
 
-    await uploadQuestionPhoto(user1question1, 'public/img/question/dog1.jpg');
-    await uploadQuestionPhoto(user1question1, 'public/img/question/dog2.jpg');
+    await uploadQuestionPhoto(user1question2, 'public/img/question/dog1.jpg');
+    await uploadQuestionPhoto(user1question2, 'public/img/question/dog2.jpg');
     console.log("b's 11 photos added");
 
     // ------------------------------------------
