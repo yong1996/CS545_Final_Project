@@ -109,7 +109,7 @@ const main = async () => {
         "help",
         "I want to know how to train my dog",
         userId1,
-        '07307'
+        '07030'
     );
     user1question2 = question2._id.toString();
     await uploadQuestionAvatar(user1question2, 'public/img/question/dog3.jpg');
@@ -144,7 +144,7 @@ const main = async () => {
     question4 = await questionData.addQuestion(
         "Best place to walk my dog?",
         "Dog",
-        "help",
+        "question",
         "I want to know where is the best place to walk my dog",
         userId2,
         '07307'
@@ -169,7 +169,7 @@ const main = async () => {
         let t = "cat "+i;
         questionn = await questionData.addQuestion(
             t,
-            "Dog",
+            "Cat",
             "Question",
             "22",
             userId2,
