@@ -33,7 +33,7 @@ function validateId(id){
 function validateTitle(title){
   if (!title) throw "title is undefinded";
   if (title.constructor !== String) throw "title is not a string";
-  if (title.length > 30) throw "length title is greater than 30";
+  if (title.length > 50) throw "length title is greater than 50";
 }
 
 function validatePet(pet){
