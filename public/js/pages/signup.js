@@ -2,7 +2,7 @@ $(function() {
     $('#signup-form').submit(function(event) {
         let letterNumber = /^[0-9a-zA-Z]+$/;
         let zipNumber = /^[0-9]+$/;
-        if ($('#username').val().length < 1) {
+        if ($('#username').val().length < 6) {
             event.preventDefault();
             error("length of username is less than 6");
             return;

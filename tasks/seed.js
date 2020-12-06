@@ -101,7 +101,25 @@ const main = async () => {
     await uploadQuestionPhoto(user1question1, 'public/img/question/dog2.jpg');
     console.log("a's 11 photos added");
 
-    // =================================    
+    // =================================  
+    
+    question2 = await questionData.addQuestion(
+        "How to train my dog",
+        "Dog",
+        "help",
+        "I want to know how to train my dog",
+        userId1,
+        '07307'
+    );
+    user1question1 = question1._id.toString();
+    await uploadQuestionAvatar(user1question1, 'public/img/question/dog.jpg');
+    console.log("b's question1 created");
+
+    await uploadQuestionPhoto(user1question1, 'public/img/question/dog1.jpg');
+    await uploadQuestionPhoto(user1question1, 'public/img/question/dog2.jpg');
+    console.log("b's 11 photos added");
+
+    // ------------------------------------------
     for (let i = 0; i < 4; i++) {        
         comment = await commentsData.addComment("You are so lovely", userId2, user1question1, user1.zip);
     }
