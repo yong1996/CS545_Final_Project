@@ -109,7 +109,7 @@ const main = async () => {
         "help",
         "I want to know how to train my dog",
         userId1,
-        '07030'
+        '07307'
     );
     user1question2 = question2._id.toString();
     await uploadQuestionAvatar(user1question2, 'public/img/question/dog3.jpg');
@@ -123,19 +123,19 @@ const main = async () => {
 
 
     question3 = await questionData.addQuestion(
-        "How to make my dog healthy?",
-        "Dog",
+        "How to make my cat healthy?",
+        "Cat",
         "help",
-        "I want to know how to prevent my dog from getting sick",
+        "I want to know how to prevent my cat from getting sick",
         userId1,
         '07307'
     );
     user1question3 = question3._id.toString();
-    await uploadQuestionAvatar(user1question3, 'public/img/question/dog6.jpg');
+    await uploadQuestionAvatar(user1question3, 'public/img/question/cat1.jpg');
     console.log("a's question3 created");
 
-    await uploadQuestionPhoto(user1question3, 'public/img/question/dog7.jpg');
-    await uploadQuestionPhoto(user1question3, 'public/img/question/dog8.jpg');
+    await uploadQuestionPhoto(user1question3, 'public/img/question/cat2.jpg');
+    await uploadQuestionPhoto(user1question3, 'public/img/question/cat3.jpg');
     console.log("a's 11 photos added");
 
     // ------------------------------------------
@@ -147,7 +147,7 @@ const main = async () => {
         "question",
         "I want to know where is the best place to walk my dog",
         userId2,
-        '07307'
+        '07030'
     );
     user2question1 = question4._id.toString();
     await uploadQuestionAvatar(user2question1, 'public/img/question/dog9.jpg');
@@ -165,18 +165,18 @@ const main = async () => {
 
 
 
-    for(let i= 0; i<30; i++){
-        let t = "cat "+i;
-        questionn = await questionData.addQuestion(
-            t,
-            "Cat",
-            "Question",
-            "22",
-            userId2,
-            user2.zip,
-        );
-        console.log(i+" question created");
-    }
+    // for(let i= 0; i<30; i++){
+    //     let t = "cat "+i;
+    //     questionn = await questionData.addQuestion(
+    //         t,
+    //         "Cat",
+    //         "Question",
+    //         "22",
+    //         userId2,
+    //         user2.zip,
+    //     );
+    //     console.log(i+" question created");
+    // }
     // =================================
     await db.serverConfig.close();
 }
