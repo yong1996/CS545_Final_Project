@@ -17,7 +17,7 @@ $(function() {
             error("zip should contain only number");
             return;
         }
-        if ($('#password').val().length < 1) {
+        if ($('#password').val().length < 8) {
             event.preventDefault();
             error("length of password is less than 8");
             return;
