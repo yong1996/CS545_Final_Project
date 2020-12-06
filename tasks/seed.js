@@ -104,7 +104,7 @@ const main = async () => {
     // =================================  
     
     question2 = await questionData.addQuestion(
-        "How to train my dog",
+        "How to train my dog?",
         "Dog",
         "help",
         "I want to know how to train my dog",
@@ -142,7 +142,7 @@ const main = async () => {
 
 
     question4 = await questionData.addQuestion(
-        "Best place to walk my dog",
+        "Best place to walk my dog?",
         "Dog",
         "help",
         "I want to know where is the best place to walk my dog",
